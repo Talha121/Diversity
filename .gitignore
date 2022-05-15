@@ -23,6 +23,12 @@ mono_crash.*
 [Rr]eleases/
 x64/
 x86/
+build/
+bld/
+bin/
+Bin/
+obj/
+Obj/
 [Ww][Ii][Nn]32/
 [Aa][Rr][Mm]/
 [Aa][Rr][Mm]64/
