@@ -1,5 +1,0 @@
-G:\Projects\Diversity\Services\Services.Diversity\Diversity.Database\bin\Debug\Diversity.Database.dacpac
-G:\Projects\Diversity\Services\Services.Diversity\Diversity.Database\bin\Debug\Diversity.Database.dll
-G:\Projects\Diversity\Services\Services.Diversity\Diversity.Database\bin\Debug\Diversity.Database.pdb
-G:\Projects\Diversity\Services\Services.Diversity\Diversity.Database\obj\Debug\Diversity.Database.dll
-G:\Projects\Diversity\Services\Services.Diversity\Diversity.Database\obj\Debug\Diversity.Database.pdb
