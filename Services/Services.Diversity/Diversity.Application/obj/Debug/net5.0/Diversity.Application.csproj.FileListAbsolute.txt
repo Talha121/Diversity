@@ -1,0 +1,12 @@
+G:\Projects\Diversity\Services\Services.Diversity\Diversity.Application\bin\Debug\net5.0\Diversity.Application.deps.json
+G:\Projects\Diversity\Services\Services.Diversity\Diversity.Application\bin\Debug\net5.0\Diversity.Application.dll
+G:\Projects\Diversity\Services\Services.Diversity\Diversity.Application\bin\Debug\net5.0\ref\Diversity.Application.dll
+G:\Projects\Diversity\Services\Services.Diversity\Diversity.Application\bin\Debug\net5.0\Diversity.Application.pdb
+G:\Projects\Diversity\Services\Services.Diversity\Diversity.Application\obj\Debug\net5.0\Diversity.Application.GeneratedMSBuildEditorConfig.editorconfig
+G:\Projects\Diversity\Services\Services.Diversity\Diversity.Application\obj\Debug\net5.0\Diversity.Application.AssemblyInfoInputs.cache
+G:\Projects\Diversity\Services\Services.Diversity\Diversity.Application\obj\Debug\net5.0\Diversity.Application.AssemblyInfo.cs
+G:\Projects\Diversity\Services\Services.Diversity\Diversity.Application\obj\Debug\net5.0\Diversity.Application.csproj.CoreCompileInputs.cache
+G:\Projects\Diversity\Services\Services.Diversity\Diversity.Application\obj\Debug\net5.0\Diversity.Application.dll
+G:\Projects\Diversity\Services\Services.Diversity\Diversity.Application\obj\Debug\net5.0\ref\Diversity.Application.dll
+G:\Projects\Diversity\Services\Services.Diversity\Diversity.Application\obj\Debug\net5.0\Diversity.Application.pdb
+G:\Projects\Diversity\Services\Services.Diversity\Diversity.Application\obj\Debug\net5.0\Diversity.Application.csproj.AssemblyReference.cache
