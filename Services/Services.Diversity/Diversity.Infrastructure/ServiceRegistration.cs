@@ -16,6 +16,12 @@ namespace Diversity.Infrastructure
             service.AddScoped<DbContext, DataContext>();
             service.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             service.AddScoped<IDepositRequestsRepository, DepositRequestRepository>();
+            service.AddScoped<IWithdrawRequestRepository, WithdrawRequestRepository>();
+            //service.AddScoped<IOrderRepository, OrderRepository>();
+            //service.AddScoped<IProductImageRepository, ProductImageRepository>();
+            //service.AddScoped<IProductRepository, ProductRepository>();
+            //service.AddScoped<IUserAccountRepository, UserAccountRepository>();
+            service.AddScoped<IUserDetailRepository, UserDetailRepository>();
         }
         public static void ConfigureDbContext(this IServiceCollection service, IConfiguration configuration)
         {

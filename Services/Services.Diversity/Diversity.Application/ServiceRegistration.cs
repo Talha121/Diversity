@@ -1,12 +1,7 @@
 ﻿using Diversity.Application.Services.Implementations;
 using Diversity.Application.Services.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Diversity.Application
 {
@@ -17,6 +12,11 @@ namespace Diversity.Application
             service.AddAutoMapper(Assembly.GetExecutingAssembly());
             service.AddScoped<IDepositRequestService, DepositRequestService>();
             service.AddScoped<IFileService, FileService>();
+            service.AddScoped<IWithdrawRequestService, WithdrawRequestService>();
+            //service.AddScoped<IOrderService, OrderService>();
+            //service.AddScoped<IProductService, ProductService>();
+            service.AddScoped<IUserDetailService, UserDetailService>();
+           // service.AddScoped<IUserAccountService, UserAccountService>();
         }
     }
 }
