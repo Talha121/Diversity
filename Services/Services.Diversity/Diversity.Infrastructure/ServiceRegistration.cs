@@ -1,4 +1,6 @@
-﻿using Diversity.Infrastructure.SharedRepositories;
+﻿using Diversity.Infrastructure.Repositories.Implementation;
+using Diversity.Infrastructure.Repositories.Interfaces;
+using Diversity.Infrastructure.SharedRepositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +15,7 @@ namespace Diversity.Infrastructure
         {
             service.AddScoped<DbContext, DataContext>();
             service.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            service.AddScoped<IDepositRequestsRepository, DepositRequestRepository>();
         }
         public static void ConfigureDbContext(this IServiceCollection service, IConfiguration configuration)
         {

@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Diversity.Application.Services.Implementations;
+using Diversity.Application.Services.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +15,8 @@ namespace Diversity.Application
         public static void AddAplicationLayer(this IServiceCollection service)
         {
             service.AddAutoMapper(Assembly.GetExecutingAssembly());
+            service.AddScoped<IDepositRequestService, DepositRequestService>();
+            service.AddScoped<IFileService, FileService>();
         }
     }
 }
