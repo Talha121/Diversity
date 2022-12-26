@@ -16,6 +16,9 @@ namespace Diversity.Application.Mappers.Profiles
             CreateMap<UserDetail, UserDetailDTO>();
             CreateMap<UserDetailDTO, UserDetail>();
 
+            CreateMap<UserDetailDTO, UserLoginDTO>();
+            CreateMap<UserLoginDTO, UserDetailDTO>();
+
         }
     }
 }

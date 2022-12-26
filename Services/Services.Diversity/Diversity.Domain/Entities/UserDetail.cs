@@ -19,7 +19,7 @@ namespace Diversity.Domain.Entities
 
         public virtual List<DepositRequest> DepositRequests { get; set; }
         public virtual List<WithdrawRequest> WithdrawRequests { get; set; }
-        public virtual List<UserAccount> UserAccounts  { get; set; }
+        public virtual List<UserAccount> UserAccounts { get; set; }
         public virtual List<Order> Orders { get; set; }
 
 

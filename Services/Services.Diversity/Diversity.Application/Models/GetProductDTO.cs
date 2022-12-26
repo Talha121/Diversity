@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Diversity.Domain.Entities
+namespace Diversity.Application.Models
 {
-    public class Product
+    public class GetProductDTO
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public int? Amount { get; set; }
@@ -17,7 +17,6 @@ namespace Diversity.Domain.Entities
         public int? Quantity { get; set; }
         public int? Commission { get; set; }
         public bool IsActive { get; set; }
-
-        public virtual List<ProductImage> ProductImages { get; set; }
+        public List<ProductImageDTO> productImages { get; set; }
     }
 }

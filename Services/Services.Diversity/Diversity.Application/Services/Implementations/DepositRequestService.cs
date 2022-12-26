@@ -27,7 +27,7 @@ namespace Diversity.Application.Services.Implementations
         {
             try
             {
-                var fileName = this.fileService.UploadedFile(request.ProofFile, "Deposit");
+                var fileName =await this.fileService.UploadedFile(request.ProofFile, "Deposit");
                 DepositRequest depositrequest = new DepositRequest()
                 {
                     Amount = request.Amount,

@@ -27,8 +27,10 @@ namespace Diversity.Application.Services.Implementations
         {
             var userData = this.mapper.Map<UserDetail>(userDetail);
             userData.Role = "User";
-            var response=this.userDetailRepository.AddAsync(userData);
-            return this.mapper.Map<UserDetailDTO>(response);
+            userData.IsActive= true;
+            var response=await this.userDetailRepository.AddAsync(userData);
+            UserDetailDTO data = this.mapper.Map<UserDetailDTO>(response);
+            return data;
         }
 
         public async Task<UserDetailDTO> EnableDisableUser(int? userId, bool isActive)
@@ -41,9 +43,17 @@ namespace Diversity.Application.Services.Implementations
 
         public async Task<List<UserDetailDTO>> GetAllUsers()
         {
-            var data = this.userDetailRepository.GetAllAsync();
-            List<UserDetailDTO> users = this.mapper.Map<List<UserDetailDTO>>(data);
-            return users;
+            try
+            {
+                var data = await this.userDetailRepository.GetAllAsync();
+                List<UserDetailDTO> users = this.mapper.Map<List<UserDetailDTO>>(data);
+                return users;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
 
         public async Task<UserDetailDTO> GetUserByEmail(string email)
@@ -64,21 +74,27 @@ namespace Diversity.Application.Services.Implementations
 
         public async Task<UserDetailDTO> UpdateUserProfile(UserDetailDTO userDetail)
         {
-            var data = await this.userDetailRepository.GetByIdAsync((int)userDetail.Id);
-            if (userDetail.ProfileImage !=null)
+            try
             {
-                var fileName = this.fileService.UploadedFile(userDetail.ProfileImage, "UserProfile");
-                userDetail.ImageUrl = "Images/UserProfile/" + fileName;
-            }
-            else
-            {
-                userDetail.ImageUrl = data.ImageUrl;
-            }
+                var data = await this.userDetailRepository.GetByIdAsync((int)userDetail.Id);
+                if (userDetail.ProfileImage != null)
+                {
+                    var fileName =await this.fileService.UploadedFile(userDetail.ProfileImage, "UserProfile");
+                    data.ImageUrl = "Images/UserProfile/" + fileName;
+                }
+                data.Name=userDetail.Name;
+                data.PhoneNumber = userDetail.PhoneNumber;
 
-            UserDetail detail = this.mapper.Map<UserDetail>(userDetail);
-            var update=this.userDetailRepository.UpdateAsync(detail);
-            UserDetailDTO response=this.mapper.Map<UserDetailDTO>(update);
-            return response;
+                var update =await this.userDetailRepository.UpdateAsync(data);
+
+                UserDetailDTO response = this.mapper.Map<UserDetailDTO>(update);
+                return response;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
             
             
         }

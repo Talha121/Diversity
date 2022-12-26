@@ -10,7 +10,7 @@ namespace Diversity.Domain.Entities
     public class WithdrawRequest
     {
         public int Id { get; set; }
-        public float Amount { get; set; }
+        public double Amount { get; set; }
         public int UserId { get; set; }
         public string Status { get; set; }
         [ForeignKey("UserId")]

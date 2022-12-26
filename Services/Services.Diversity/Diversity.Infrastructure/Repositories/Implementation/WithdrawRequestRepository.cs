@@ -12,7 +12,7 @@ namespace Diversity.Infrastructure.Repositories.Implementation
 {
     public class WithdrawRequestRepository : GenericRepository<WithdrawRequest>, IWithdrawRequestRepository
     {
-        public WithdrawRequestRepository(GenericContext context) : base(context)
+        public WithdrawRequestRepository(DataContext context) : base(context)
         {
         }
 

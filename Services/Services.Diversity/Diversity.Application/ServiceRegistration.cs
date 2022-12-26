@@ -13,10 +13,10 @@ namespace Diversity.Application
             service.AddScoped<IDepositRequestService, DepositRequestService>();
             service.AddScoped<IFileService, FileService>();
             service.AddScoped<IWithdrawRequestService, WithdrawRequestService>();
-            //service.AddScoped<IOrderService, OrderService>();
-            //service.AddScoped<IProductService, ProductService>();
+            service.AddScoped<IOrderService, OrderService>();
+            service.AddScoped<IProductService, ProductService>();
             service.AddScoped<IUserDetailService, UserDetailService>();
-           // service.AddScoped<IUserAccountService, UserAccountService>();
+            service.AddScoped<IUserAccountService, UserAccountService>();
         }
     }
 }

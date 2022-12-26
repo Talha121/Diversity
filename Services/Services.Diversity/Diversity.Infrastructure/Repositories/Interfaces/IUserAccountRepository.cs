@@ -10,5 +10,7 @@ namespace Diversity.Infrastructure.Repositories.Interfaces
 {
     public interface IUserAccountRepository : IGenericRepository<UserAccount>
     {
+        Task<UserAccount> GetByUserIdAsync(int userId);
+        Task<List<UserAccount>> GetAllUserAccount();
     }
 }

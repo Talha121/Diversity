@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Diversity.Application.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,10 @@ namespace Diversity.Application.Services.Interfaces
 {
     public interface IUserAccountService
     {
+        Task<UserAccountDTO> CreateUserAccount(UserAccountDTO userAccount);
+        Task<UserAccountDTO> UpdateUserAccount(UserAccountDTO userAccount);
+        Task<UserAccountDTO> GetUserAccountById(int userId);
+        Task<List<UserAccountDTO>> GetUserAccountList();
+
     }
 }

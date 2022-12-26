@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Diversity.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,9 @@ namespace Diversity.Application.Services.Interfaces
 {
     public interface IOrderService
     {
+        Task<Order> CreateOrder(int UserId);
+        Task<List<Order>> GetOrdersByUserId(int userId);
+        Task<Order> GetUserCurrentOrder(int userId, int id);
+        Task<Order> CompleteOrder(int OrderId);
     }
 }

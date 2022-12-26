@@ -17,10 +17,10 @@ namespace Diversity.Infrastructure
             service.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             service.AddScoped<IDepositRequestsRepository, DepositRequestRepository>();
             service.AddScoped<IWithdrawRequestRepository, WithdrawRequestRepository>();
-            //service.AddScoped<IOrderRepository, OrderRepository>();
-            //service.AddScoped<IProductImageRepository, ProductImageRepository>();
-            //service.AddScoped<IProductRepository, ProductRepository>();
-            //service.AddScoped<IUserAccountRepository, UserAccountRepository>();
+            service.AddScoped<IOrderRepository, OrderRepository>();
+            service.AddScoped<IProductImageRepository, ProductImageRepository>();
+            service.AddScoped<IProductRepository, ProductRepository>();
+            service.AddScoped<IUserAccountRepository, UserAccountRepository>();
             service.AddScoped<IUserDetailRepository, UserDetailRepository>();
         }
         public static void ConfigureDbContext(this IServiceCollection service, IConfiguration configuration)
@@ -32,8 +32,9 @@ namespace Diversity.Infrastructure
                     providerOptions =>
                     {
                         providerOptions.EnableRetryOnFailure(maxRetryCount: 5, maxRetryDelay: TimeSpan.FromSeconds(10), errorNumbersToAdd: null);
+                        //providerOptions.CommandTimeout((int)TimeSpan.FromMinutes(10).TotalSeconds);
                     });
-            });
+            }, ServiceLifetime.Transient);
         }
     }
 }

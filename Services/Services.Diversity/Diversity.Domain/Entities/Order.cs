@@ -12,7 +12,8 @@ namespace Diversity.Domain.Entities
         public int Id { get; set; }
         public int UserId { get; set; }
         public int ProductId { get; set; }
-        public string Status { get; set; }
+        public string OrderStatus { get; set; }
+        public Guid OrderId { get; set; }
         [ForeignKey("UserId")]
         public virtual UserDetail User { get; set; }
         [ForeignKey("ProductId")]

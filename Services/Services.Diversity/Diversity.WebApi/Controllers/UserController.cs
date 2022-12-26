@@ -9,6 +9,9 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.Extensions.Configuration;
+using Diversity.Domain.Entities;
+using AutoMapper;
+using System.Collections.Generic;
 
 namespace Diversity.WebApi.Controllers
 {
@@ -17,21 +20,42 @@ namespace Diversity.WebApi.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserDetailService userDetailService;
+        private readonly IUserAccountService userAccountService;
+        private readonly IOrderService orderService;
         public readonly IConfiguration config;
-        public UserController(IUserDetailService userDetailService, IConfiguration config)
+        public readonly IMapper mapper;
+        public UserController(IUserDetailService userDetailService, IConfiguration config,IMapper mapper, IUserAccountService userAccountService, IOrderService orderService)
         {
             this.userDetailService = userDetailService;
             this.config = config;
+            this.mapper = mapper;
+            this.userAccountService = userAccountService;
+            this.orderService = orderService;
         }
         [HttpPost("Register", Name = "Register")]
-        public async Task<IActionResult> Register(UserDetailDTO userDetail)
+        public async Task<IActionResult> Register(UserLoginDTO userDetail)
         {
             try
             {
                 var check = await this.userDetailService.GetUserByEmail(userDetail.Email);
                 if (check == null)
                 {
-                    var user=await this.userDetailService.CreateUser(userDetail);
+                    UserDetailDTO detail = this.mapper.Map<UserDetailDTO>(userDetail);
+
+                    var user=await this.userDetailService.CreateUser(detail);
+                    UserAccountDTO useracc = new UserAccountDTO()
+                    {
+                        UserId = user.Id,
+                        BalanceAmount = 0,
+                        RechargeAmount = 0,
+                        TotalCommission = 0,
+                        TotalDeposit = 0,
+                        TotalWithdraw = 0
+                    };
+                    var userAccount = await this.userAccountService.CreateUserAccount(useracc);
+
+                    var userOrder = await this.orderService.CreateOrder((int)user.Id);
+
                     var token=CreateToken(user);
                     return Ok(new { res = token });
                 }
@@ -46,7 +70,7 @@ namespace Diversity.WebApi.Controllers
             }
         }
         [HttpPost("Login")]
-        public async Task<IActionResult> Login(UserDetailDTO userDetail)
+        public async Task<IActionResult> Login(UserLoginDTO userDetail)
         {
             try
             {
@@ -69,6 +93,65 @@ namespace Diversity.WebApi.Controllers
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
+            }
+        }
+        [HttpGet("GetAllUsers")]
+        public async Task<IActionResult> GetAllUsers()
+        {
+            try
+            {
+                var data =await this.userDetailService.GetAllUsers();
+                return Ok(data);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [HttpGet("GetUserProfile")]
+        public async Task<IActionResult> GetUserProfile()
+        {
+            try
+            {
+                var identity = HttpContext.User.Identity as ClaimsIdentity;
+                if (identity != null)
+                {
+                    //IEnumerable<Claim> claims = identity.Claims;
+                    // or
+                    var UserId = identity.FindFirst("Id").Value;
+
+                    var data = this.userDetailService.GetUserProfile(int.Parse(UserId));
+                    return Ok(data);
+                }
+                return Unauthorized();
+              
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [HttpPost("UpdateProfile")]
+        public async Task<IActionResult> UpdateUserProfile([FromForm] UserDetailDTO userDetail)
+        {
+            try
+            {
+                //var identity = HttpContext.User.Identity as ClaimsIdentity;
+                //if (identity != null)
+                //{
+                    //IEnumerable<Claim> claims = identity.Claims;
+                    // or
+                    //var UserId = identity.FindFirst("Id").Value;
+                    //userDetail.Id = int.Parse(UserId);
+                    var data = this.userDetailService.UpdateUserProfile(userDetail);
+                    return Ok(data);
+                //}
+                //return Unauthorized();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
 

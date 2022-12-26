@@ -18,7 +18,7 @@ namespace Diversity.Infrastructure.EntitiesConfiguration
             builder.HasKey(x => x.Id);
             builder.HasOne(d => d.User)
                 .WithMany(s => s.UserAccounts)
-                .HasForeignKey(d=>d.UserId);
+                .HasForeignKey(d => d.UserId);
         }
     }
 }

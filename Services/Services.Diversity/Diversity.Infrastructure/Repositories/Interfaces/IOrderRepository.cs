@@ -10,5 +10,8 @@ namespace Diversity.Infrastructure.Repositories.Interfaces
 {
     public interface IOrderRepository : IGenericRepository<Order>
     {
+        Task<List<Order>> GetOrdersByUserId(int userId);
+        Task<Order> GetUserCurrentOrder(int userId,int id);
+        Task<Order> CompleteOrder(int OrderId);
     }
 }

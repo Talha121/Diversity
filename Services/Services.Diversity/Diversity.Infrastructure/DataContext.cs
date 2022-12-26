@@ -2,11 +2,7 @@
 using Diversity.Infrastructure.EntitiesConfiguration;
 using Diversity.Infrastructure.SharedRepositories;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.Entity.Infrastructure;
 
 namespace Diversity.Infrastructure
 {
@@ -14,7 +10,7 @@ namespace Diversity.Infrastructure
     {
         public DataContext(DbContextOptions options):base(options)
         {
-
+            
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
