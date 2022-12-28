@@ -1,0 +1,11 @@
+<div *ngIf="show">
+  <ngb-toast *ngFor="let toast of toastService.toasts" [class]="toast.classname" [autohide]="true"
+    [delay]="toast.delay || 5000" (hidden)="toastService.remove(toast)">
+    <ng-template [ngIf]="isTemplate(toast)" [ngIfElse]="text">
+      <ng-template [ngTemplateOutlet]="toast.textOrTpl"> </ng-template>
+    </ng-template>
+    <ng-template #text>{{ toast.textOrTpl }}</ng-template>
+    <button type="button" aria-label="Close" class="close" (click)="toastService.remove(toast)"><span
+        aria-hidden="true">×</span></button>
+  </ngb-toast>
+</div>

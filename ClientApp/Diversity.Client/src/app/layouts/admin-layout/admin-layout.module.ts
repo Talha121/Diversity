@@ -12,6 +12,11 @@ import { MapsComponent } from '../../pages/maps/maps.component';
 import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
 import { TablesComponent } from '../../pages/tables/tables.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { OrderComponent } from 'src/app/pages/order/order.component';
+import { DepositComponent } from 'src/app/pages/deposit/deposit.component';
+import { WithdrawComponent } from 'src/app/pages/withdraw/withdraw.component';
+import { GrabOrderComponent } from 'src/app/pages/grab-order/grab-order.component';
+import { ProfileComponent } from 'src/app/pages/profile/profile.component';
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -25,6 +30,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   ],
   declarations: [
     DashboardComponent,
+    OrderComponent,
+    DepositComponent,
+    WithdrawComponent,
+    GrabOrderComponent,
+    ProfileComponent,
     UserProfileComponent,
     TablesComponent,
     IconsComponent,
