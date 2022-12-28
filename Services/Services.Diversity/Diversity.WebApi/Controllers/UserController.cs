@@ -74,7 +74,7 @@ namespace Diversity.WebApi.Controllers
         {
             try
             {
-                var check = await this.userDetailService.GetUserByEmail(userDetail.Email);
+                var check = await this.userDetailService.GetUserByEmail(userDetail.Email.ToLower());
                 if (check != null)
                 {
                     if(check.Password == userDetail.Password)

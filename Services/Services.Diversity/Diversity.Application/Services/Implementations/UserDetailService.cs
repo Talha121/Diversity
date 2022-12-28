@@ -28,6 +28,7 @@ namespace Diversity.Application.Services.Implementations
             var userData = this.mapper.Map<UserDetail>(userDetail);
             userData.Role = "User";
             userData.IsActive= true;
+            userData.Email.ToLower();
             var response=await this.userDetailRepository.AddAsync(userData);
             UserDetailDTO data = this.mapper.Map<UserDetailDTO>(response);
             return data;
