@@ -72,6 +72,7 @@ namespace Diversity.WebApi
             // app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
             app.UseRouting();
 

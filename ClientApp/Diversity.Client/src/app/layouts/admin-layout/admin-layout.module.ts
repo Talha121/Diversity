@@ -17,7 +17,7 @@ import { DepositComponent } from 'src/app/pages/deposit/deposit.component';
 import { WithdrawComponent } from 'src/app/pages/withdraw/withdraw.component';
 import { GrabOrderComponent } from 'src/app/pages/grab-order/grab-order.component';
 import { ProfileComponent } from 'src/app/pages/profile/profile.component';
-// import { ToastrModule } from 'ngx-toastr';
+import { NgImageSliderModule } from 'ng-image-slider';
 
 @NgModule({
   imports: [
@@ -26,7 +26,9 @@ import { ProfileComponent } from 'src/app/pages/profile/profile.component';
     FormsModule,
     HttpClientModule,
     NgbModule,
-    ClipboardModule
+    ClipboardModule,
+    ReactiveFormsModule,
+    NgImageSliderModule    
   ],
   declarations: [
     DashboardComponent,

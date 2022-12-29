@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 
-import { NgbModule, NgbTooltipModule,NgbToastModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbTooltipModule,NgbToastModule, NgbModalModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { AuthGuard } from './_core/_guards/auth.guard';
@@ -29,7 +29,6 @@ import { InterceptorService } from './_core/_interceptors/auth.interceptor';
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
     NgbToastModule,
     NgbTooltipModule,
-    NgbModalModule
   ],
   declarations: [
     AppComponent,
@@ -43,7 +42,9 @@ import { InterceptorService } from './_core/_interceptors/auth.interceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,
       multi: true
-    }
+    },
+    NgbModal
+
   ],
   bootstrap: [AppComponent]
 })

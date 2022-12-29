@@ -1,8 +1,10 @@
 ﻿using Diversity.Application.Models;
 using Diversity.Application.Services.Interfaces;
+using Diversity.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Diversity.WebApi.Controllers
@@ -35,6 +37,9 @@ namespace Diversity.WebApi.Controllers
         {
             try
             {
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                depositRequest.UserId =int.Parse(userId);
+                depositRequest.Status = "Pending";
                 var data = await this.depositRequestService.CreateDepositRequest(depositRequest);
                 return Ok(data);
             }
@@ -43,12 +48,13 @@ namespace Diversity.WebApi.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [HttpPost("getUserDepositRequests", Name = "GetUserDepositRequest")]
+        [HttpGet("getUserDepositRequests", Name = "GetUserDepositRequest")]
         public async Task<IActionResult> getUserDepositRequests()
         {
             try
             {
-                var data = await this.depositRequestService.GetUserDepositRequests(12);
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var data = await this.depositRequestService.GetUserDepositRequests(int.Parse(userId));
                 return Ok(data);
             }
             catch (Exception ex)

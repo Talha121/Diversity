@@ -1,3 +1,76 @@
-<p>
-  order works!
-</p>
+<div class="container-fluid mt--7">
+ 
+  <!-- Dark table -->
+  <div class="row mt-5">
+    <div class="col">
+      <div class="card bg-default shadow">
+        <!-- <div class="card-header bg-transparent border-0">
+          <h3 class="text-white mb-0">order Requests</h3>
+          <h3 class="btn btn-sm btn-primary text-right" (click)="openorderModal(content)">Create New Request</h3>
+        </div> -->
+        <div class="card-header bg-transparent border-0" style="overflow: auto;">
+          <div  style="float: left;">
+            <h3 class="text-white mb-0">Orders</h3>
+          </div>
+          <div style="float: right;">
+            <div style="overflow: auto;">
+              <div  style="float: left; padding-right: 10px;">
+                <select #statusFilter class="form-select" (change)="statusFilterChange(statusFilter.value)">
+                  <option value="">Select Status</option>
+                  <option value="Pending">Pending</option>
+                  <option value="Rejected">Completed</option>
+                </select>
+              </div>
+            </div>
+           
+           
+          </div>
+
+        </div>
+        
+        <div class="table-responsive">
+          <table class="table align-items-center table-dark table-flush">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Order Id</th>
+                <th scope="col">Product</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Commission</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let order of gridResult;index as i">
+                <td scope="row">
+                  <div class="align-items-center">
+                    {{i+1}}
+                  </div>
+                </td>
+                <td>
+                  {{order.orderId}}
+                </td>
+                <td>
+                  {{order.products?.title}}
+                </td>
+                <td>
+                  {{order.products?.quantity}}
+                </td>
+                <td>
+                  {{order.products?.amount}}
+                </td>
+                <td> 
+                  {{order.products?.commission}}
+                </td>
+                <td> 
+                  {{order.orderStatus}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

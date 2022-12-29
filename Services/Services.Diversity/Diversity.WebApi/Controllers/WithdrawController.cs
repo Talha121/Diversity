@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System;
 using Diversity.Application.Models;
+using Diversity.Domain.Entities;
+using System.Security.Claims;
 
 namespace Diversity.WebApi.Controllers
 {
@@ -35,7 +37,8 @@ namespace Diversity.WebApi.Controllers
         {
             try
             {
-                var data = await this.withdrawRequestService.GetUserWithdrawRequests(12);
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var data = await this.withdrawRequestService.GetUserWithdrawRequests(int.Parse(userId));
                 return Ok(data);
             }
             catch (Exception ex)
@@ -48,6 +51,9 @@ namespace Diversity.WebApi.Controllers
         {
             try
             {
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                dto.UserId = int.Parse(userId);
+                dto.Status = "Pending";
                 var data = await this.withdrawRequestService.CreateWithdrawRequest(dto);
                 return Ok(data);
             }

@@ -11,7 +11,7 @@ namespace Diversity.Application.Services.Interfaces
     {
         Task<Order> CreateOrder(int UserId);
         Task<List<Order>> GetOrdersByUserId(int userId);
-        Task<Order> GetUserCurrentOrder(int userId, int id);
+        Task<Order> GetUserCurrentOrder(int userId);
         Task<Order> CompleteOrder(int OrderId);
     }
 }

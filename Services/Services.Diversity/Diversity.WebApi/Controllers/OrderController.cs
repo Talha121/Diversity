@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System;
 using Diversity.Application.Models;
+using Diversity.Domain.Entities;
+using System.Security.Claims;
 
 namespace Diversity.WebApi.Controllers
 {
@@ -26,7 +28,8 @@ namespace Diversity.WebApi.Controllers
         {
             try
             {
-                var data = await this.orderService.GetOrdersByUserId(12);
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var data = await this.orderService.GetOrdersByUserId(int.Parse(userId));
                 return Ok(data);
             }
             catch (Exception ex)
@@ -35,11 +38,12 @@ namespace Diversity.WebApi.Controllers
             }
         }
         [HttpGet("GetUserCurrentOrder", Name = "GetUserCurrentOrder")]
-        public async Task<IActionResult> GetUserCurrentOrder(int productId)
+        public async Task<IActionResult> GetUserCurrentOrder()
         {
             try
             {
-                var data = await this.orderService.GetUserCurrentOrder(12, productId);
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var data = await this.orderService.GetUserCurrentOrder(int.Parse(userId));
                 return Ok(data);
             }
             catch (Exception ex)
@@ -52,7 +56,7 @@ namespace Diversity.WebApi.Controllers
         {
             try
             {
-                var userId = 18;
+                var userId =int.Parse(this.User.FindFirstValue(ClaimTypes.NameIdentifier));
                 var data = await this.orderService.CompleteOrder(orderId);
                 var createNewOrder = await this.orderService.CreateOrder(userId);
                 var getUserAccount =await this.userAccountService.GetUserAccountById(userId);
@@ -61,6 +65,7 @@ namespace Diversity.WebApi.Controllers
                 {
                     UserAccountDTO acc = new UserAccountDTO()
                     {
+                        Id=getUserAccount.Id,
                         UserId = userId,
                         BalanceAmount =getUserAccount.BalanceAmount-userProduct.Amount,
                         TotalCommission=getUserAccount.TotalCommission+userProduct.Commission,

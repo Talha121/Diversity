@@ -26,12 +26,12 @@ namespace Diversity.Infrastructure.Repositories.Implementation
 
         public async Task<List<Order>> GetOrdersByUserId(int userId)
         {
-            return await this.DataContext.Set<Order>().Where(x => x.UserId == userId).AsNoTracking().ToListAsync();
+            return await this.DataContext.Set<Order>().Where(x => x.UserId == userId).Include(x=>x.Products).AsNoTracking().ToListAsync();
         }
 
-        public async Task<Order> GetUserCurrentOrder(int userId, int id)
+        public async Task<Order> GetUserCurrentOrder(int userId)
         {
-            return await this.DataContext.Set<Order>().Where(x => x.UserId == userId&& x.Id==id && x.OrderStatus =="Pending").Include(x=>x.Products).ThenInclude(x=>x.ProductImages).AsNoTracking().FirstOrDefaultAsync();
+            return await this.DataContext.Set<Order>().Where(x => x.UserId == userId && x.OrderStatus =="Pending").Include(x=>x.Products).ThenInclude(x=>x.ProductImages).AsNoTracking().FirstOrDefaultAsync();
         }
     }
 }

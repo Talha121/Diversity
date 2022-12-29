@@ -48,15 +48,24 @@ namespace Diversity.Application.Services.Implementations
                 var productList = await this.productService.GetAllProducts();
 
                 var nextProduct = productList.Where(x => x.IsActive == true && x.OrderNum > product.OrderNum).OrderBy(x => x.OrderNum).FirstOrDefault();
-                Order orderData = new Order()
+                if (nextProduct != null)
                 {
-                    UserId = userId,
-                    ProductId = (int)nextProduct.Id,
-                    OrderStatus = "Pending",
-                    OrderId= Guid.NewGuid()
+                    Order orderData = new Order()
+                    {
+                        UserId = userId,
+                        ProductId = (int)nextProduct.Id,
+                        OrderStatus = "Pending",
+                        OrderId = Guid.NewGuid()
+                    };
+                    var orderResponse = await this.orderRepository.AddAsync(orderData);
+                    return orderResponse;
+                }
+                Order nullOrder = new Order()
+                {
+
                 };
-                var orderResponse=await this.orderRepository.AddAsync(orderData);
-                return orderResponse;
+                return nullOrder;
+               
             }
         }
 
@@ -65,9 +74,9 @@ namespace Diversity.Application.Services.Implementations
             return await this.orderRepository.GetOrdersByUserId(userId);
         }
 
-        public async Task<Order> GetUserCurrentOrder(int userId, int id)
+        public async Task<Order> GetUserCurrentOrder(int userId)
         {
-            return await this.orderRepository.GetUserCurrentOrder(userId, id);
+            return await this.orderRepository.GetUserCurrentOrder(userId);
         }
     }
 }
