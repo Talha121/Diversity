@@ -163,7 +163,9 @@ namespace Diversity.WebApi.Controllers
                          new Claim(ClaimTypes.Name,userDetail.Name.ToString()),
                           new Claim("Name", userDetail.Name),
                           new Claim(ClaimTypes.Role,userDetail.Role),
-                          new Claim("ID",userDetail.Id.ToString())
+                          new Claim("ID",userDetail.Id.ToString()),
+                          new Claim("Email",userDetail.Email),
+                          new Claim("profile",userDetail.ImageUrl)
 
                    };
 

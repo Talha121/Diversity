@@ -20,8 +20,15 @@ namespace Diversity.Infrastructure.Repositories.Implementation
         {
             var order=await GetByIdAsync(OrderId);
             order.OrderStatus = "Completed";
+            order.CompletedDate = DateTime.Now;
             await UpdateAsync(order);
             return order;
+        }
+
+        public async Task<List<Order>> GetAllOrders()
+        {
+            var data = await this.DataContext.Set<Order>().Include(x => x.User).Include(x => x.Products).ToListAsync();
+            return data;
         }
 
         public async Task<List<Order>> GetOrdersByUserId(int userId)

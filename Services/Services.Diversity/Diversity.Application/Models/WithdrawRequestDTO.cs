@@ -10,6 +10,7 @@ namespace Diversity.Application.Models
     {
         public int? Id { get; set; }
         public double Amount { get; set; }
+        public string AccountNumber { get; set; }
         public int? UserId { get; set; }
         public string UserName { get; set; }
         public string Status { get; set; }

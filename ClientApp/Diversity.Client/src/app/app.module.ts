@@ -15,6 +15,7 @@ import { AuthGuard } from './_core/_guards/auth.guard';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastComponent } from './shared/toast/toast.component';
 import { InterceptorService } from './_core/_interceptors/auth.interceptor';
+import { AdminDepositComponent } from './pages/admin-deposit/admin-deposit.component';
 
 @NgModule({
   imports: [

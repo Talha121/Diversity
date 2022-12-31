@@ -15,11 +15,13 @@ export class DepositComponent implements OnInit {
 
   depositForm: FormGroup = new FormGroup({});
   selectedFile: any;
-  depositList:any[]=[];
-  gridResult:any[]=[];
-  fileBaseurl=environment.fileBaseUrl;
-  constructor(private modalService: NgbModal, private depositService: DepositService,private spinner:NgxSpinnerService,private toastr: ToastService) { }
+  depositList: any[] = [];
+  gridResult: any[] = [];
+  fileBaseurl = environment.fileBaseUrl;
+  BankDetailImagePath: string = "";
+  constructor(private modalService: NgbModal, private depositService: DepositService, private spinner: NgxSpinnerService, private toastr: ToastService) { }
   ngOnInit() {
+    this.getBankDetails();
     this.getDepositRequestForUser();
     this.inititalizeDepositForm();
   }
@@ -76,29 +78,42 @@ export class DepositComponent implements OnInit {
       this.toastr.error("Amount, Type and Proof is required.");
     }
   }
-  
-  getDepositRequestForUser(){
+
+  getDepositRequestForUser() {
     this.spinner.show();
     this.depositService.getDepositRequestForUser().subscribe({
-      next:(response:any)=>{
-        this.depositList=response;
-        this.gridResult=response;
+      next: (response: any) => {
+        this.depositList = response;
+        this.gridResult = response;
         this.spinner.hide();
       },
-      error:(err:any)=>{
+      error: (err: any) => {
         this.toastr.error(err.error);
         this.spinner.hide();
       }
     })
   }
 
-  statusFilterChange(value:any){
-    if(value!=""){
-      this.gridResult=this.depositList.filter(x=>x.status==value);
+  statusFilterChange(value: any) {
+    if (value != "") {
+      this.gridResult = this.depositList.filter(x => x.status == value);
     }
-    else{
-      this.gridResult=this.depositList;
+    else {
+      this.gridResult = this.depositList;
     }
-    
+  }
+
+  getBankDetails() {
+    this.spinner.show()
+    this.depositService.getBankDetails().subscribe({
+      next: (response: any) => {
+        this.spinner.hide();
+        this.BankDetailImagePath = response.imagePath;
+      },
+      error: (err: any) => {
+        this.spinner.hide();
+        this.toastr.error(err.error)
+      }
+    })
   }
 }

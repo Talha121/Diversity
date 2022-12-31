@@ -19,4 +19,12 @@ export class WithdrawService {
     return this.http.get(this.baseUrl + "Withdraw/GetUserWithdrawRequests");
   }
 
+  updatewithdrawRequest(withdrawData: any) {
+    return this.http.post(this.baseUrl + "Withdraw/UpdateWithdrawRequest", withdrawData);
+  }
+
+  getAllwithdrawRequest(){
+    return this.http.get(this.baseUrl + "Withdraw/WithdrawRequest");
+  }
+
 }

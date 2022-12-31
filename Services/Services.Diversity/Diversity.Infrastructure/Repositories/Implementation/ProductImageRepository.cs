@@ -19,6 +19,7 @@ namespace Diversity.Infrastructure.Repositories.Implementation
         public async Task<bool> AddAllImageAsync(List<ProductImage> image)
         {
              await this.DataContext.Set<ProductImage>().AddRangeAsync(image);
+            await this.DataContext.SaveChangesAsync();
             return true;
         }
 
@@ -28,6 +29,7 @@ namespace Diversity.Infrastructure.Repositories.Implementation
             if(data.Count > 0)
             {
                 this.DataContext.Set<ProductImage>().RemoveRange(data);
+                await this.DataContext.SaveChangesAsync();
             }
             return true;
         }

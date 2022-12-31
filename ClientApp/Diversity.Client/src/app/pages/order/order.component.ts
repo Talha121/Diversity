@@ -43,6 +43,5 @@ export class OrderComponent implements OnInit {
     else{
       this.gridResult=this.orderList;
     }
-    
   }
 }

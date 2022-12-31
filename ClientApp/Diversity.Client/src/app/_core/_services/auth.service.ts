@@ -42,4 +42,9 @@ export class AuthService {
   public get getToken() {
     return localStorage.getItem("accessToken");
   }
+  
+  public get DecodedToken(){
+    var token=localStorage.getItem("accessToken");
+    return JSON.parse(window.atob(token.split('.')[1]));
+  }
 }

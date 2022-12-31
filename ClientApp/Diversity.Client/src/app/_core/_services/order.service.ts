@@ -23,4 +23,8 @@ export class OrderService {
     return this.http.get(this.baseUrl + "Order/CompleteOrder?orderId="+orderId);
   }
 
+  getAllOrders(){
+    return this.http.get(this.baseUrl + "Order/GetAllOrders");
+  }
+
 }

@@ -17,7 +17,15 @@ namespace Diversity.Application.Mappers.Profiles
             CreateMap<ProductDTO, Product>();
 
             CreateMap<Product, GetProductDTO>()
-                .ForMember(s => s.productImages, x => x.MapFrom(t => t.ProductImages != null ? t.ProductImages : null)); ;
+                .ForMember(s => s.productImages, x => x.MapFrom(t => t.ProductImages != null ? t.ProductImages : null));
+            CreateMap<GetProductDTO, Product>()
+               .ForMember(s => s.ProductImages, x => x.MapFrom(t => t.productImages != null ? t.productImages : null));
+
+            CreateMap<ProductImage, ProductImageDTO>();
+            CreateMap<ProductImageDTO, ProductImage>();
+
+
+
         }
     }
 }

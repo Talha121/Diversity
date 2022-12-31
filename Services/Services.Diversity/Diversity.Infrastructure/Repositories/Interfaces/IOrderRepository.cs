@@ -13,5 +13,7 @@ namespace Diversity.Infrastructure.Repositories.Interfaces
         Task<List<Order>> GetOrdersByUserId(int userId);
         Task<Order> GetUserCurrentOrder(int userId);
         Task<Order> CompleteOrder(int OrderId);
+
+        Task<List<Order>> GetAllOrders();
     }
 }

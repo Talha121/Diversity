@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { DashboardService } from 'src/app/_core/_services/dashboard.service';
 import { OrderService } from 'src/app/_core/_services/order.service';
 import { ToastService } from 'src/app/_core/_services/toast-service.service';
 
@@ -12,11 +13,12 @@ import { ToastService } from 'src/app/_core/_services/toast-service.service';
 export class GrabOrderComponent implements OnInit {
 
   currentOrder: any = {};
-
-  constructor(private orderService: OrderService, private spinner: NgxSpinnerService, private toastr: ToastService,private router:Router) { }
+  userBalanceAmount:number=0;
+  constructor(private orderService: OrderService, private spinner: NgxSpinnerService, private toastr: ToastService,private router:Router,private dashboardService:DashboardService) { }
 
   ngOnInit() {
     this.getCurrentUserOrder();
+    this.getBalanceAmount();
   }
 
   imageObject = [{
@@ -53,16 +55,34 @@ export class GrabOrderComponent implements OnInit {
   }
 
   completeOrder() {
-    this.spinner.show();
-    this.orderService.completeOrder(this.currentOrder.id).subscribe({
-      next: (response: any) => {
-        this.spinner.hide();
-        this.toastr.success("Order Completed Successfully.");
-        this.getCurrentUserOrder();
-      },
-      error: (err: any) => {
-        this.spinner.hide();
-        this.toastr.error(err.error)
+    if(this.currentOrder.products.amount>this.userBalanceAmount){
+      this.toastr.error("Insufficient Balance. Please recharge your account.")
+    }
+    else{
+      this.spinner.show();
+      this.orderService.completeOrder(this.currentOrder.id).subscribe({
+        next: (response: any) => {
+          this.spinner.hide();
+          this.toastr.success("Order Completed Successfully.");
+          this.getCurrentUserOrder();
+          this.loadUserDashboard();
+        },
+        error: (err: any) => {
+          this.spinner.hide();
+          this.toastr.error(err.error)
+        }
+      })
+    }
+   
+  }
+  loadUserDashboard() {
+    this.dashboardService.getUserDashBoard();
+  }
+
+  getBalanceAmount(){
+    this.dashboardService.userDashboardData$.subscribe(response=>{
+      if(response!=null){
+        this.userBalanceAmount=response.userAccountDetails?.balanceAmount;
       }
     })
   }

@@ -18,4 +18,20 @@ export class DepositService {
   getDepositRequestForUser(){
     return this.http.get(this.baseUrl + "DepositRequest/getUserDepositRequests");
   }
+
+  getALlDepositRequest(){
+    return this.http.get(this.baseUrl + "DepositRequest/DepositRequests");
+  }
+
+  updateDepositRequest(depositData: any) {
+    return this.http.post(this.baseUrl + "DepositRequest/UpdateDepositRequest", depositData);
+  }
+
+  saveBankDetails(bankDetails:any){
+    return this.http.post(this.baseUrl + "DepositRequest/CreateBankDetails", bankDetails);
+  }
+
+  getBankDetails(){
+    return this.http.get(this.baseUrl + "DepositRequest/GetBankDetails");
+  }
 }

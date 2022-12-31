@@ -11,6 +11,7 @@ namespace Diversity.Domain.Entities
     {
         public int Id { get; set; }
         public double Amount { get; set; }
+        public string AccountNumber { get; set; }
         public int UserId { get; set; }
         public string Status { get; set; }
         [ForeignKey("UserId")]

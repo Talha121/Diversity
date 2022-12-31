@@ -27,7 +27,8 @@ export class WithdrawComponent implements OnInit {
 
   inititalizewithdrawForm() {
     this.withdrawForm = new FormGroup({
-      amount: new FormControl("", Validators.required)
+      amount: new FormControl("", Validators.required),
+      accountNumber: new FormControl("", Validators.required)
     });
   }
   openwithdrawModal(content) {
@@ -44,7 +45,7 @@ export class WithdrawComponent implements OnInit {
       this.withdrawService.createwithdrawRequest(formValues).subscribe({
         next: (response: any) => {
           console.log(response)
-          this.toastr.success("withdraw Request Created Successfully.");
+          this.toastr.success("Withdraw Request Created Successfully.");
           this.modalService.dismissAll();
           this.spinner.hide();
           this.getwithdrawRequestForUser();
@@ -56,7 +57,7 @@ export class WithdrawComponent implements OnInit {
       })
     }
     else {
-      this.toastr.error("Amount is required.");
+      this.toastr.error("Amount and Account number is required.");
     }
   }
   

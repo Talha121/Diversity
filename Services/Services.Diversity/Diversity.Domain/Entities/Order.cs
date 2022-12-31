@@ -13,6 +13,8 @@ namespace Diversity.Domain.Entities
         public int UserId { get; set; }
         public int ProductId { get; set; }
         public string OrderStatus { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public DateTime? CompletedDate { get; set; }
         public Guid OrderId { get; set; }
         [ForeignKey("UserId")]
         public virtual UserDetail User { get; set; }

@@ -37,6 +37,19 @@ namespace Diversity.WebApi.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        [HttpGet("GetAllOrders", Name = "GetAllOrders")]
+        public async Task<IActionResult> GetAllOrders()
+        {
+            try
+            {
+                var data = await this.orderService.GetAllOrders();
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
         [HttpGet("GetUserCurrentOrder", Name = "GetUserCurrentOrder")]
         public async Task<IActionResult> GetUserCurrentOrder()
         {
@@ -67,7 +80,7 @@ namespace Diversity.WebApi.Controllers
                     {
                         Id=getUserAccount.Id,
                         UserId = userId,
-                        BalanceAmount =getUserAccount.BalanceAmount-userProduct.Amount,
+                        BalanceAmount =getUserAccount.BalanceAmount+userProduct.Commission,
                         TotalCommission=getUserAccount.TotalCommission+userProduct.Commission,
                     };
                 var updateUserAccounts = await this.userAccountService.UpdateUserAccount(acc);

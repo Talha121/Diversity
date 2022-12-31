@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.spinner.hide();
           this.toastr.success(`Logged In Successfully.`);
           if(this.authService.isAuthenticated){
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['/']);
           }
         },
         error: (err) => {
@@ -47,5 +47,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     else{
       this.toastr.error("Validation Failed. Email and Password is required.");
     }
+  }
+
+  singUp(){
+    this.router.navigate(["/register"])
   }
 }

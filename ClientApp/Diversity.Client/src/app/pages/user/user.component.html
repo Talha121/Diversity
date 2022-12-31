@@ -1,0 +1,75 @@
+<div class="header pb-8 pt-5 pt-md-8">
+  <div class="container-fluid mt--7">
+ 
+    <!-- Dark table -->
+    <div class="row mt-5">
+      <div class="col">
+        <div class="card bg-default shadow">
+          <!-- <div class="card-header bg-transparent border-0">
+            <h3 class="text-white mb-0">user Requests</h3>
+            <h3 class="btn btn-sm btn-primary text-right" (click)="openuserModal(content)">Create New Request</h3>
+          </div> -->
+          <div class="card-header bg-transparent border-0" style="overflow: auto;">
+            <div  style="float: left;">
+              <h3 class="text-white mb-0">All Users</h3>
+            </div>
+            <div style="float: right;">
+              <div style="overflow: auto;">
+                <div  style="float: left; padding-right: 10px;">
+                  <input #searchInput class="form-control" placeholder="Search Name" (input)="searchFilterChange(searchInput.value)"/>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="table-responsive">
+            <table class="table align-items-center table-dark table-flush">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Profile</th>
+                  <th scope="col">Phone #</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let user of gridResult;index as i">
+                  <td scope="row">
+                    <div class="align-items-center">
+                      {{i+1}}
+                    </div>
+                  </td>
+                  <td>
+                    {{user.name}}
+                  </td>
+                  <td>
+                    {{user.email}}
+                  </td>
+                  <td>
+                    <div class="avatar-group">
+                      <span *ngIf="user.imageUrl !=null">
+                        <a  class="avatar avatar-sm" data-toggle="tooltip" data-original-title="{{user.name}}">
+                          <img alt="{{user.name}}" src="{{fileBaseurl+user.imageUrl}}" class="rounded-circle">
+                        </a>
+                      </span>
+                      <span *ngIf="user.imageUrl==null">
+                        <a  class="avatar avatar-sm" data-toggle="tooltip" data-original-title="{{user.name}}">
+                          <img alt="" src="../../../assets/images/no-profile.png" class="rounded-circle">
+                        </a>
+                      </span>
+                     
+                    </div>
+                  </td>
+                  <td>
+                    {{user.phoneNumber}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -22,6 +22,7 @@ namespace Diversity.Infrastructure
             service.AddScoped<IProductRepository, ProductRepository>();
             service.AddScoped<IUserAccountRepository, UserAccountRepository>();
             service.AddScoped<IUserDetailRepository, UserDetailRepository>();
+            service.AddScoped<IBankDetailRepository, BankDetailRepository>();
         }
         public static void ConfigureDbContext(this IServiceCollection service, IConfiguration configuration)
         {

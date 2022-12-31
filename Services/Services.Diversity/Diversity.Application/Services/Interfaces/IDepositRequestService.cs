@@ -1,5 +1,6 @@
 ﻿using Diversity.Application.Models;
 using Diversity.Domain.Entities;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,8 @@ namespace Diversity.Application.Services.Interfaces
         Task<List<DepositRequestDTO>> GetUserDepositRequests(int userId);
         Task<DepositRequest> CreateDepositRequest(DepositRequestDTO request);
         Task<DepositRequestDTO> UpdateDepositRequest(DepositRequestDTO request);
+
+        Task<BankDetails> CreateBankDetails(IFormFile file);
+        Task<BankDetails> GetBankDetails();
     }
 }

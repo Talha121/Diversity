@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/_core/_services/auth.service';
 
 declare interface RouteInfo {
     path: string;
@@ -7,19 +8,27 @@ declare interface RouteInfo {
     icon: string;
     class: string;
 }
-export const ROUTES: RouteInfo[] = [
-    { path: '/dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: '' },
-    { path: '/deposit', title: 'Deposit',  icon:'ni-money-coins text-info', class: '' },
-    { path: '/grab-order', title: 'Grab Order',  icon:'ni-cart text-orange', class: '' },
-    { path: '/order', title: 'Orders',  icon:'ni-bag-17 text-blue', class: '' },
-    { path: '/withdraw', title: 'Withdraw',  icon:'ni-money-coins text-green', class: '' },
-    { path: '/profile', title: 'Profile',  icon:'ni-single-02 text-yellow', class: '' },
-    { path: '/icons', title: 'Icons',  icon:'ni-planet text-blue', class: '' },
-    { path: '/maps', title: 'Maps',  icon:'ni-pin-3 text-orange', class: '' },
-    { path: '/user-profile', title: 'User profile',  icon:'ni-single-02 text-yellow', class: '' },
-    { path: '/tables', title: 'Tables',  icon:'ni-bullet-list-67 text-red', class: '' },
-    { path: '/login', title: 'Login',  icon:'ni-key-25 text-info', class: '' },
-    { path: '/register', title: 'Register',  icon:'ni-circle-08 text-pink', class: '' }
+export const UserROUTES: RouteInfo[] = [
+    { path: '/user/dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: '' },
+    { path: '/user/deposit', title: 'Deposit',  icon:'ni-money-coins text-info', class: '' },
+    { path: '/user/grab-order', title: 'Grab Order',  icon:'ni-cart text-orange', class: '' },
+    { path: '/user/order', title: 'Orders',  icon:'ni-bag-17 text-blue', class: '' },
+    { path: '/user/withdraw', title: 'Withdraw',  icon:'ni-money-coins text-green', class: '' },
+    { path: '/user/profile', title: 'Profile',  icon:'ni-single-02 text-yellow', class: '' },
+];
+export const AdminROUTES: RouteInfo[] = [
+  { path: '/admin/admin-dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: '' },
+  { path: '/admin/admin-orders', title: 'Order',  icon:'ni-bag-17 text-blue', class: '' },
+  { path: '/admin/admin-deposit', title: 'Deposit',  icon:'ni-money-coins text-info', class: '' },
+  { path: '/admin/admin-withdraw', title: 'Withdraw',  icon:'ni-money-coins text-green', class: '' },
+  { path: '/admin/product', title: 'Products',  icon:'ni-single-02 text-yellow', class: '' },
+  { path: '/admin/user', title: 'Users',  icon:'ni-single-02 text-yellow', class: '' },
+  // { path: '/icons', title: 'Icons',  icon:'ni-planet text-blue', class: '' },
+  // { path: '/maps', title: 'Maps',  icon:'ni-pin-3 text-orange', class: '' },
+  // { path: '/user-profile', title: 'User profile',  icon:'ni-single-02 text-yellow', class: '' },
+  // { path: '/tables', title: 'Tables',  icon:'ni-bullet-list-67 text-red', class: '' },
+  // { path: '/login', title: 'Login',  icon:'ni-key-25 text-info', class: '' },
+  // { path: '/register', title: 'Register',  icon:'ni-circle-08 text-pink', class: '' }
 ];
 
 @Component({
@@ -32,12 +41,22 @@ export class SidebarComponent implements OnInit {
   public menuItems: any[];
   public isCollapsed = true;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,private authService:AuthService) { }
 
   ngOnInit() {
-    this.menuItems = ROUTES.filter(menuItem => menuItem);
-    this.router.events.subscribe((event) => {
-      this.isCollapsed = true;
-   });
+    let data=this.authService.DecodedToken;
+    if(data.role=='User'){
+      this.menuItems = UserROUTES.filter(menuItem => menuItem);
+      this.router.events.subscribe((event) => {
+        this.isCollapsed = true;
+     });
+    }
+    if(data.role=='Admin'){
+      this.menuItems = AdminROUTES.filter(menuItem => menuItem);
+      this.router.events.subscribe((event) => {
+        this.isCollapsed = true;
+     });
+    }
+   
   }
 }

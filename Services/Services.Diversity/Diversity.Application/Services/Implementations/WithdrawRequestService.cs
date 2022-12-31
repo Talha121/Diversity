@@ -15,10 +15,12 @@ namespace Diversity.Application.Services.Implementations
     {
         private readonly IWithdrawRequestRepository withdrawRequestRepository;
         private readonly IMapper mapper;
-        public WithdrawRequestService(IWithdrawRequestRepository withdrawRequestRepository, IMapper mapper)
+        private readonly IUserAccountService userAccountService;
+        public WithdrawRequestService(IWithdrawRequestRepository withdrawRequestRepository, IMapper mapper, IUserAccountService userAccountService)
         {
             this.withdrawRequestRepository = withdrawRequestRepository;
             this.mapper = mapper;
+            this.userAccountService = userAccountService;
         }
 
         public async Task<WithdrawRequestDTO> CreateWithdrawRequest(WithdrawRequestDTO request)
@@ -55,6 +57,15 @@ namespace Diversity.Application.Services.Implementations
             var data = await this.withdrawRequestRepository.GetByIdAsync((int)request.Id);
             data.Status = request.Status;
             var updateRquest = await this.withdrawRequestRepository.UpdateAsync(data);
+            if (request.Status == "Approved")
+            {
+                var getUserAccount = await this.userAccountService.GetUserAccountById(updateRquest.UserId);
+                if (getUserAccount != null)
+                {
+                    getUserAccount.BalanceAmount = (int?)(getUserAccount.BalanceAmount - updateRquest.Amount);
+                    var updateUserAccounts = await this.userAccountService.UpdateUserAccount(getUserAccount);
+                }
+            }
             WithdrawRequestDTO withdrawData = this.mapper.Map<WithdrawRequestDTO>(updateRquest);
             return withdrawData;
         }

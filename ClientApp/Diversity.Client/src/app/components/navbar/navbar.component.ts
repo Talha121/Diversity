@@ -1,7 +1,9 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
-import { ROUTES } from '../sidebar/sidebar.component';
+import { AdminROUTES, UserROUTES } from '../sidebar/sidebar.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/_core/_services/auth.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-navbar',
@@ -12,12 +14,22 @@ export class NavbarComponent implements OnInit {
   public focus;
   public listTitles: any[];
   public location: Location;
-  constructor(location: Location,  private element: ElementRef, private router: Router) {
+  userData:any={};
+  fileBaseUrl=environment.fileBaseUrl;
+  constructor(location: Location,  private element: ElementRef, private router: Router,private authService:AuthService) {
     this.location = location;
   }
 
   ngOnInit() {
-    this.listTitles = ROUTES.filter(listTitle => listTitle);
+    let data=this.authService.DecodedToken;
+    if(data.role=='User'){
+      this.listTitles = UserROUTES.filter(listTitle => listTitle);
+    }
+    if(data.role=='Admin'){
+      this.listTitles = AdminROUTES.filter(listTitle => listTitle);
+    }
+   
+    this.getDataFromToken();
   }
   getTitle(){
     var titlee = this.location.prepareExternalUrl(this.location.path());
@@ -31,6 +43,15 @@ export class NavbarComponent implements OnInit {
         }
     }
     return 'Dashboard';
+  }
+
+  logoutUser(){
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
+
+  getDataFromToken(){
+    this.userData=this.authService.DecodedToken;
   }
 
 }

@@ -21,6 +21,7 @@ namespace Diversity.Infrastructure
             modelBuilder.ApplyConfiguration(new ProductImageConfiguration());
             modelBuilder.ApplyConfiguration(new UserAccountConfiguration());
             modelBuilder.ApplyConfiguration(new UserDetailConfiguration());
+            modelBuilder.ApplyConfiguration(new BankDetailConfiguration());
 
         }
 
@@ -31,5 +32,6 @@ namespace Diversity.Infrastructure
         public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<UserAccount> UserAccounts { get; set; }
         public DbSet<UserDetail> UserDetails { get; set; }
+        public DbSet<BankDetails> BankDetails { get; set; }
     }
 }

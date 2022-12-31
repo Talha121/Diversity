@@ -36,7 +36,8 @@ namespace Diversity.Application.Services.Implementations
                     UserId = userId,
                     ProductId = (int)products.Where(x => x.IsActive &&x.OrderNum!=null).OrderBy(x => x.OrderNum).Select(x => x.Id).FirstOrDefault(),
                     OrderStatus = "Pending",
-                    OrderId = Guid.NewGuid()
+                    OrderId = Guid.NewGuid(),
+                    CreatedDate=DateTime.Now
                 };
                 var orderResponse = await this.orderRepository.AddAsync(orderData);
                 return orderResponse;
@@ -55,7 +56,8 @@ namespace Diversity.Application.Services.Implementations
                         UserId = userId,
                         ProductId = (int)nextProduct.Id,
                         OrderStatus = "Pending",
-                        OrderId = Guid.NewGuid()
+                        OrderId = Guid.NewGuid(),
+                        CreatedDate = DateTime.Now
                     };
                     var orderResponse = await this.orderRepository.AddAsync(orderData);
                     return orderResponse;
@@ -67,6 +69,12 @@ namespace Diversity.Application.Services.Implementations
                 return nullOrder;
                
             }
+        }
+
+        public async Task<List<Order>> GetAllOrders()
+        {
+            var data = await this.orderRepository.GetAllOrders();
+            return data;
         }
 
         public async Task<List<Order>> GetOrdersByUserId(int userId)

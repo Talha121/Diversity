@@ -8,5 +8,7 @@ namespace Diversity.Application.Models
 {
     public class ProductImageDTO
     {
+        public string ImageName { get; set; }
+        public string ImagePath { get; set; }
     }
 }

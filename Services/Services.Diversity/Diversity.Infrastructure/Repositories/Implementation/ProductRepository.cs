@@ -19,7 +19,7 @@ namespace Diversity.Infrastructure.Repositories.Implementation
 
         public async Task<List<Product>> GetAllProducts()
         {
-            return await this.DataContext.Set<Product>().Include(x => x.ProductImages).ToListAsync();
+            return await this.DataContext.Set<Product>().Include(x => x.ProductImages).OrderBy(x=>x.OrderNum).ToListAsync();
         }
 
         public Task<Product> GetProductById(int productId)

@@ -64,14 +64,38 @@ namespace Diversity.WebApi.Controllers
         }
 
         [HttpPost("UpdateDepositRequest", Name = "UpdateDepositRequest")]
-        public async Task<IActionResult> UpdateDepositRequest(int? depositId, string status)
+        public async Task<IActionResult> UpdateDepositRequest(DepositRequestDTO dto)
         {
             try
             {
-                DepositRequestDTO dto = new DepositRequestDTO();
-                dto.Id = depositId;
-                dto.Status= status;
                 var data = await this.depositRequestService.UpdateDepositRequest(dto);
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("CreateBankDetails", Name = "CreateBankDetails")]
+        public async Task<IActionResult> CreateBankDetails(IFormFile file)
+        {
+            try
+            {
+                var data = await this.depositRequestService.CreateBankDetails(file);
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpGet("GetBankDetails", Name = "GetBankDetails")]
+        public async Task<IActionResult> GetBankDetails()
+        {
+            try
+            {
+                var data = await this.depositRequestService.GetBankDetails();
                 return Ok(data);
             }
             catch (Exception ex)
