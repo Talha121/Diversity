@@ -4,7 +4,15 @@
     <div class="col">
       <div class="card shadow">
         <div class="card-header border-0">
-          <h3 class="mb-0">Current Order   # {{currentOrder.orderId}}</h3>
+          <div style="overflow: auto;">
+            <span style="float: left;">
+              <h3 class="mb-0">Current Order   # {{currentOrder.order?.orderId}}</h3>
+            </span>
+            <span style="float: right;">
+              <h3 class="mb-0">Order Number {{currentOrder.order?.products?.orderNum}} out of {{currentOrder.totalCount}}</h3>
+            </span>
+          </div>
+        
         </div>
         <main class="container">
 
@@ -27,8 +35,8 @@
     
             <!-- Product Description -->
             <div class="product-description">
-              <h1>{{currentOrder.products?.title}}</h1>
-              <p>{{currentOrder.products?.description}}</p>
+              <h1>{{currentOrder.order?.products?.title}}</h1>
+              <p>{{currentOrder.order?.products?.description}}</p>
             </div>
     
             <!-- Product Configuration -->
@@ -38,14 +46,14 @@
               
               <!-- Cable Configuration -->
               <div class="cable-config">
-               <span><strong>Commission:</strong> $ {{currentOrder.products?.commission}}</span><br>
-               <span><strong>Estimated Return:</strong> $ {{currentOrder.products?.commission}}</span>
+               <span><strong>Commission:</strong> $ {{currentOrder.order?.products?.commission}}</span><br>
+               <span><strong>Estimated Return:</strong> $ {{currentOrder.order?.products?.commission}}</span>
               </div>
             </div>
     
             <!-- Product Pricing -->
             <div class="product-price">
-              <span>$ {{currentOrder.products?.amount}}</span>
+              <span>$ {{currentOrder.order?.products?.amount}}</span>
               <button (click)="completeOrder()" class="btn btn-success">Complete Order</button>
             </div>
           </div>

@@ -41,19 +41,28 @@
                 <input class="form-control" formControlName="password" placeholder="Password" type="password">
               </div>
             </div>
+            <div class="custom-control custom-control-alternative custom-checkbox">
+              <input class="custom-control-input" id=" customCheckLogin" type="checkbox">
+              <label class="custom-control-label" for=" customCheckLogin">
+                <span class="text-muted">Accept Terms & Conditions</span>
+              </label>
+            </div>
             <div class="text-center">
-              <button type="button" class="btn btn-primary my-4"(click)="loginUser()">Sign in</button>
+              <button type="button" class="btn bg-gradient-danger my-4 text-black"(click)="loginUser()">Sign in</button>
+            </div>
+            <div class="text-center">
+              <a (click)="singUp()"><small>Create new account?</small></a>
             </div>
           </form>
+          
         </div>
+        
       </div>
       <div class="row mt-3">
         <!-- <div class="col-6">
           <a href="javascript:void(0)" class="text-light"><small>Forgot password?</small></a>
         </div> -->
-        <div class="col-6 text-right">
-          <a (click)="singUp()" class="text-light"><small>Create new account</small></a>
-        </div>
+       
       </div>
     </div>
   </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/_core/_services/auth.service';
 import { DashboardService } from 'src/app/_core/_services/dashboard.service';
 
 @Component({
@@ -8,10 +9,12 @@ import { DashboardService } from 'src/app/_core/_services/dashboard.service';
 })
 export class AdminLayoutComponent implements OnInit {
   dashBoardData:any={};
-  constructor(private dashboardService: DashboardService) { }
+  constructor(private dashboardService: DashboardService,private authService:AuthService) { }
 
   ngOnInit() {
-    this.loadUserDashboard();
+    if(this.authService.DecodedToken.role=="User"){
+      this.loadUserDashboard();
+    }
   }
 
   loadUserDashboard() {

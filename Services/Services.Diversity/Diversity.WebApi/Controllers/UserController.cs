@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Diversity.Domain.Entities;
 using AutoMapper;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Diversity.WebApi.Controllers
 {
@@ -101,7 +102,7 @@ namespace Diversity.WebApi.Controllers
             try
             {
                 var data =await this.userDetailService.GetAllUsers();
-                return Ok(data);
+                return Ok(data.Where(x=>x.Role=="User").ToList());
             }
             catch(Exception ex)
             {
@@ -116,11 +117,8 @@ namespace Diversity.WebApi.Controllers
                 var identity = HttpContext.User.Identity as ClaimsIdentity;
                 if (identity != null)
                 {
-                    //IEnumerable<Claim> claims = identity.Claims;
-                    // or
-                    var UserId = identity.FindFirst("Id").Value;
-
-                    var data = this.userDetailService.GetUserProfile(int.Parse(UserId));
+                    var userId = int.Parse(this.User.FindFirstValue(ClaimTypes.NameIdentifier));
+                    var data =await this.userDetailService.GetUserProfile(userId);
                     return Ok(data);
                 }
                 return Unauthorized();
@@ -136,17 +134,11 @@ namespace Diversity.WebApi.Controllers
         {
             try
             {
-                //var identity = HttpContext.User.Identity as ClaimsIdentity;
-                //if (identity != null)
-                //{
-                    //IEnumerable<Claim> claims = identity.Claims;
-                    // or
-                    //var UserId = identity.FindFirst("Id").Value;
-                    //userDetail.Id = int.Parse(UserId);
-                    var data = this.userDetailService.UpdateUserProfile(userDetail);
+                var userId = int.Parse(this.User.FindFirstValue(ClaimTypes.NameIdentifier));
+                
+                var data = this.userDetailService.UpdateUserProfile(userDetail);
                     return Ok(data);
-                //}
-                //return Unauthorized();
+               
 
             }
             catch (Exception ex)
@@ -157,6 +149,10 @@ namespace Diversity.WebApi.Controllers
 
         private string CreateToken(UserDetailDTO userDetail)
         {
+            if (userDetail.ImageUrl == null)
+            {
+                userDetail.ImageUrl = "";
+            }
             var claims = new[]
               {
                           new Claim(ClaimTypes.NameIdentifier, userDetail.Id.ToString()),

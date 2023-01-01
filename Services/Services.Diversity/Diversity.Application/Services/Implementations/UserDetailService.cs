@@ -69,7 +69,7 @@ namespace Diversity.Application.Services.Implementations
 
         public async Task<UserDetailDTO> GetUserProfile(int? userId)
         {
-            var data = this.userDetailRepository.GetByIdAsync((int)userId);
+            var data =await  this.userDetailRepository.GetByIdAsync((int)userId);
             return this.mapper.Map<UserDetailDTO>(data);
         }
 

@@ -92,7 +92,7 @@ namespace Diversity.WebApi.Controllers
                 //var userAccounts=await this.userAccountService.GetUserAccountList();
                 var data = new
                 {
-                    totalUsers= users.Count,
+                    totalUsers= users.Where(x=>x.Role=="User").Count(),
                     totalOrders=orders.Count,
                     pendingOrder=orders.Where(x=>x.OrderStatus=="Pending").Count(),
                     completedOrders=orders.Where(x=>x.OrderStatus =="Completed").Count(),

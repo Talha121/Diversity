@@ -1,29 +1,3 @@
 ::ng-deep .modal-backdrop {
     z-index: 1050 !important;
   }
-
-  a:link {
-    color: rgb(0, 60, 128) !important;
-    background-color: transparent !important;
-    text-decoration: none !important;
-  }
-  
-  a:visited {
-    color: pink !important;
-    background-color: transparent !important;
-    text-decoration: none !important;
-  }
-  
-  a:hover {
-    color: rgb(21, 255, 0) !important;
-    background-color: transparent !important;
-    text-decoration: underline !important;
-  }
-  
-  a:active {
-    color: yellow !important;
-    background-color: transparent !important;
-    text-decoration: underline !important;
-  }
-
-  

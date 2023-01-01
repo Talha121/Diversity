@@ -40,7 +40,7 @@ namespace Diversity.Application.Services.Implementations
             {
                 Title= product.Title,
                 Amount=product.Amount,
-                IsActive=product.IsActive,
+                IsActive=true,
                 Commission=product.Commission,
                 Description=product.Description,
                 EstimatedReturn=product.EstimatedReturn,
@@ -90,7 +90,7 @@ namespace Diversity.Application.Services.Implementations
                 Id= (int)product.Id,
                 Title = product.Title,
                 Amount = product.Amount,
-                IsActive = product.IsActive,
+                IsActive =true,
                 Commission = product.Commission,
                 Description = product.Description,
                 EstimatedReturn = product.EstimatedReturn,

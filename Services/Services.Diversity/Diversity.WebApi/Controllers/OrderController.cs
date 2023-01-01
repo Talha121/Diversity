@@ -56,7 +56,13 @@ namespace Diversity.WebApi.Controllers
             try
             {
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-                var data = await this.orderService.GetUserCurrentOrder(int.Parse(userId));
+                var currentOrders = await this.orderService.GetUserCurrentOrder(int.Parse(userId));
+                var totalOrder = await this.productService.GetAllProducts();
+                var data = new
+                {
+                    order = currentOrders,
+                    totalCount = totalOrder.Count,
+                };
                 return Ok(data);
             }
             catch (Exception ex)

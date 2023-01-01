@@ -15,4 +15,12 @@ export class UserService {
     return this.http.get(this.baseUrl + "User/GetAllUsers");
   }
 
+  getUserProfile() {
+    return this.http.get(this.baseUrl + "User/GetUserProfile");
+  }
+
+  updateUserProfile(data:any) {
+    return this.http.post(this.baseUrl + "User/UpdateProfile",data);
+  }
+
 }

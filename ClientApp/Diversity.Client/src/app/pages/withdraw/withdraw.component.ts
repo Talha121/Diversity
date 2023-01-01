@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { DashboardService } from 'src/app/_core/_services/dashboard.service';
 import { ToastService } from 'src/app/_core/_services/toast-service.service';
 import { WithdrawService } from 'src/app/_core/_services/withdraw.service';
 import { environment } from 'src/environments/environment';
@@ -17,10 +18,12 @@ export class WithdrawComponent implements OnInit {
   selectedFile: any;
   withdrawList:any[]=[];
   gridResult:any[]=[];
-  constructor(private modalService: NgbModal, private withdrawService: WithdrawService,private spinner:NgxSpinnerService,private toastr: ToastService) { }
+  userBalanceAmount:number=0;
+  constructor(private modalService: NgbModal, private withdrawService: WithdrawService,private spinner:NgxSpinnerService,private toastr: ToastService,private dashboardService:DashboardService) { }
   ngOnInit() {
     this.getwithdrawRequestForUser();
     this.inititalizewithdrawForm();
+    this.getBalanceAmount();
   }
   ngOnDestroy() {
   }
@@ -37,9 +40,13 @@ export class WithdrawComponent implements OnInit {
   }
 
   savewithdraw() {
-    //debugger
+   
     if (this.withdrawForm.valid) {
       let formValues = this.withdrawForm.value;
+      if(this.userBalanceAmount<formValues.amount){
+        this.toastr.error("Insufficient Balance");
+        return;
+      }
       this.spinner.show();
       console.log(formValues)
       this.withdrawService.createwithdrawRequest(formValues).subscribe({
@@ -48,6 +55,7 @@ export class WithdrawComponent implements OnInit {
           this.toastr.success("Withdraw Request Created Successfully.");
           this.modalService.dismissAll();
           this.spinner.hide();
+          this.withdrawForm.reset();
           this.getwithdrawRequestForUser();
         },
         error: (err: any) => {
@@ -84,6 +92,14 @@ export class WithdrawComponent implements OnInit {
       this.gridResult=this.withdrawList;
     }
     
+  }
+
+  getBalanceAmount(){
+    this.dashboardService.userDashboardData$.subscribe(response=>{
+      if(response!=null){
+        this.userBalanceAmount=response.userAccountDetails?.balanceAmount;
+      }
+    })
   }
 }
 

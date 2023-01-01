@@ -23,7 +23,7 @@
                 </select>
               </div>
               <div style="float: right;">
-                <button type="button" class="btn btn-primary" (click)="openwithdrawModal(content)">Create New Request</button>
+                <button type="button" class="btn btn-primary" (click)="openwithdrawModal(content)">Withdraw</button>
               </div>
             </div>
            
@@ -38,6 +38,7 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Amount</th>
+                <th scope="col">Account Number</th>
                 <th scope="col">Status</th>
               </tr>
             </thead>
@@ -51,6 +52,7 @@
                 <td>
                   <span>$</span> {{withdraw.amount}}
                 </td>
+                <td>{{withdraw.accountNumber}}</td>
                 <td>
                   <span class="badge badge-dot mr-4">
                     <i class="bg-warning"></i> {{withdraw.status}}
@@ -74,16 +76,16 @@
 	<div class="modal-body">
     <form [formGroup]="withdrawForm">
       <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-4">
           <div class="form-group">
             <label class="form-control-label" for="input-username">Amount</label>
             <input type="number" id="input-username" class="form-control form-control-alternative" placeholder="Amount" formControlName="amount">
           </div>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-8">
           <div class="form-group">
             <label class="form-control-label" for="input-username">Account Number</label>
-            <input type="number" id="input-username" class="form-control form-control-alternative" placeholder="Amount" formControlName="accountNumber">
+            <input type="text" id="input-username" class="form-control form-control-alternative" placeholder="Account Number" formControlName="accountNumber">
           </div>
         </div>
       </div>

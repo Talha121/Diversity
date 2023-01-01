@@ -32,7 +32,7 @@ export class RegisterComponent implements OnInit {
         next: (response:any) => {
           this.authService.accesToken = response.res;
           if(this.authService.isAuthenticated){
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['/']);
           }
         },
         error: (err) => {

@@ -7,10 +7,6 @@ import { ClipboardModule } from 'ngx-clipboard';
 
 import { AdminLayoutRoutes } from './admin-layout.routing';
 import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
-import { IconsComponent } from '../../pages/icons/icons.component';
-import { MapsComponent } from '../../pages/maps/maps.component';
-import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
-import { TablesComponent } from '../../pages/tables/tables.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OrderComponent } from 'src/app/pages/order/order.component';
 import { DepositComponent } from 'src/app/pages/deposit/deposit.component';
@@ -52,11 +48,7 @@ import { AdminGuard } from 'src/app/_core/_guards/admin.guard';
     AdminOrderComponent,
     ProductComponent,
     UserComponent,
-    AdminDashboardComponent,
-    UserProfileComponent,
-    TablesComponent,
-    IconsComponent,
-    MapsComponent
+    AdminDashboardComponent
   ],
   providers:[
     UserGuard,

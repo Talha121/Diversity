@@ -35,7 +35,7 @@
                   <th scope="col">User</th>
                   <th scope="col">Amount</th>
                   <th scope="col">Status</th>
-                  <th scope="col">Account</th>
+                  <th scope="col">Account Number</th>
                   <th scope="col">Action</th>
                 </tr>
               </thead>
@@ -57,7 +57,7 @@
                       <i class="bg-warning"></i> {{withdraw.status}}
                     </span>
                   </td>
-                  <td></td>
+                  <td>{{withdraw.accountNumber}}</td>
                   <td> 
                     <div *ngIf="withdraw.status=='Pending'">
                       <button class="btn btn-success" (click)="openChangeStatusModal(content,withdraw.id)">Change Status</button>
