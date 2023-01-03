@@ -80,8 +80,8 @@ namespace Diversity.Application.Services.Implementations
                 var data = await this.userDetailRepository.GetByIdAsync((int)userDetail.Id);
                 if (userDetail.ProfileImage != null)
                 {
-                    var fileName =await this.fileService.UploadedFile(userDetail.ProfileImage, "UserProfile");
-                    data.ImageUrl = "Images/UserProfile/" + fileName;
+                    var fileName =await this.fileService.UploadedFile(userDetail.ProfileImage);
+                    data.ImageUrl = fileName;
                 }
                 data.Name=userDetail.Name;
                 data.PhoneNumber = userDetail.PhoneNumber;

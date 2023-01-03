@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Diversity.Application.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Diversity.Application.Services.Interfaces
 {
-    public interface IFileService
+    public interface IUserKYCService
     {
-        Task<string> UploadedFile(IFormFile file);
+        Task<bool> CreateKYC();
+
     }
 }

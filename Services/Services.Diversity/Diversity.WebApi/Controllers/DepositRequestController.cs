@@ -38,7 +38,7 @@ namespace Diversity.WebApi.Controllers
             try
             {
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-                depositRequest.UserId =int.Parse(userId);
+                depositRequest.UserId =24;
                 depositRequest.Status = "Pending";
                 var data = await this.depositRequestService.CreateDepositRequest(depositRequest);
                 return Ok(data);

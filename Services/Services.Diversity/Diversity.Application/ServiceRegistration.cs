@@ -1,6 +1,9 @@
-﻿using Diversity.Application.Services.Implementations;
+﻿using Diversity.Application.Models;
+using Diversity.Application.Services.Implementations;
 using Diversity.Application.Services.Interfaces;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Configuration;
 using System.Reflection;
 
 namespace Diversity.Application
@@ -17,6 +20,7 @@ namespace Diversity.Application
             service.AddScoped<IProductService, ProductService>();
             service.AddScoped<IUserDetailService, UserDetailService>();
             service.AddScoped<IUserAccountService, UserAccountService>();
+            service.AddScoped<IUserKYCService, UserKYCService>();
         }
     }
 }

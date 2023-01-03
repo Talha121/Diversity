@@ -54,8 +54,8 @@ namespace Diversity.Application.Services.Implementations
                 List<ProductImage> images = new List<ProductImage>();
                 foreach(var item in product.ProductImages)
                 {
-                    var imageName = await this.fileService.UploadedFile(item, "ProductImage");
-                    var path = "Images/ProductImage/" + imageName;
+                    var imageName = await this.fileService.UploadedFile(item);
+                    var path = imageName;
                     ProductImage image = new ProductImage()
                     {
                         ImageName = imageName,
@@ -106,8 +106,8 @@ namespace Diversity.Application.Services.Implementations
                     List<ProductImage> images = new List<ProductImage>();
                     foreach (var item in product.ProductImages)
                     {
-                        var imageName = await this.fileService.UploadedFile(item, "ProductImage");
-                        var path = "Images/ProductImage/" + imageName;
+                        var imageName = await this.fileService.UploadedFile(item);
+                        var path = imageName;
                         ProductImage image = new ProductImage()
                         {
                             ImageName = imageName,

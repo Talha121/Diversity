@@ -68,6 +68,7 @@
     <Build Include="Tables\DepositRequest.sql" />
     <Build Include="Tables\WithdrawRequest.sql" />
     <Build Include="Tables\BankDetails.sql" />
+    <Build Include="Tables\UserKYC.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Diversity.Database.refactorlog" />
