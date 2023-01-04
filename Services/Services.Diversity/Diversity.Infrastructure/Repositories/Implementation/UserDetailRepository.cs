@@ -17,7 +17,7 @@ namespace Diversity.Infrastructure.Repositories.Implementation
 
         public async Task<List<UserDetail>> GetAllUsersDetails()
         {
-            var data=await this.DataContext.Set<UserDetail>().Include(x=>x.UserAccounts).Include(x=>x.Orders).ToListAsync();
+            var data=await this.DataContext.Set<UserDetail>().Include(x=>x.UserAccounts).Include(x=>x.Orders).ThenInclude(x=>x.Products).ToListAsync();
             return data;
         }
 

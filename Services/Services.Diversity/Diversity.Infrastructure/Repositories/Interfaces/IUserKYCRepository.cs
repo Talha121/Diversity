@@ -12,5 +12,6 @@ namespace Diversity.Infrastructure.Repositories.Interfaces
     {
         Task<UserKYC> GetByUser(int userId);
         Task<UserKYC> GetKYCById(int Id);
+        Task<List<UserKYC>> GetAllUserKYC();
     }
 }

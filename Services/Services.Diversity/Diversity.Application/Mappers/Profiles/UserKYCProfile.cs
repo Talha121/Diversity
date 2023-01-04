@@ -13,7 +13,8 @@ namespace Diversity.Application.Mappers.Profiles
     {
         public UserKYCProfile()
         {
-            CreateMap<UserKYC, UserKYCDTO>();
+            CreateMap<UserKYC, UserKYCDTO>()
+                .ForMember(x=>x.UserName,s=>s.MapFrom(t=>t.User.Name));
             CreateMap<UserKYCDTO, UserKYC>();
         }
     }

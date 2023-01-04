@@ -83,7 +83,7 @@ namespace Diversity.Application.Services.Implementations
 
         public async Task<List<UserKYCDTO>> GetAllUsersKYC()
         {
-            var data=await this.userKYCRepository.GetAllAsync();
+            var data=await this.userKYCRepository.GetAllUserKYC();
             var mappedData = this.mapper.Map<List<UserKYCDTO>>(data);
             return mappedData;
         }

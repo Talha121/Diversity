@@ -15,5 +15,6 @@ namespace Diversity.Application.Models
         public DateTime? CreatedDate { get; set; }
         public DateTime? CompletedDate { get; set; }
         public Guid OrderId { get; set; }
+        public ProductDTO Products { get; set; }
     }
 }

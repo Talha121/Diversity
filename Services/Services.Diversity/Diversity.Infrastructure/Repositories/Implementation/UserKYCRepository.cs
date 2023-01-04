@@ -16,6 +16,11 @@ namespace Diversity.Infrastructure.Repositories.Implementation
         {
         }
 
+        public async Task<List<UserKYC>> GetAllUserKYC()
+        {
+            return await this.DataContext.Set<UserKYC>().Include(x=>x.User).ToListAsync();
+        }
+
         public async Task<UserKYC> GetByUser(int userId)
         {
             return await this.DataContext.Set<UserKYC>().Where(x => x.UserId == userId).AsNoTracking().FirstOrDefaultAsync();

@@ -11,6 +11,7 @@ namespace Diversity.Application.Models
     {
         public int? Id { get; set; }
         public int? UserId { get; set; }
+        public string UserName { get; set; }
         public string IdentityType { get; set; }
         public string DocumentNumber { get; set; }
         public string DocumentImageOne { get; set; }
