@@ -147,6 +147,7 @@ export class ProfileComponent implements OnInit {
         next: (response: any) => {
           this.userKycData = response;
           this.spinner.hide();
+          this.getUserKyc();
         },
         error: (err: any) => {
           this.spinner.hide();

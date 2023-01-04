@@ -12,12 +12,12 @@ import { environment } from 'src/environments/environment';
 })
 export class UserComponent implements OnInit {
 
-  userList:any[]=[];
-  gridResult:any[]=[];
-  currentuserId:any=0;
-  userStatus;any="";
-  searchedValue:string="";
-  constructor(private modalService: NgbModal, private userService: UserService,private spinner:NgxSpinnerService,private toastr: ToastService) { }
+  userList: any[] = [];
+  gridResult: any[] = [];
+  currentuserId: any = 0;
+  userStatus; any = "";
+  searchedValue: string = "";
+  constructor(private modalService: NgbModal, private userService: UserService, private spinner: NgxSpinnerService, private toastr: ToastService) { }
   ngOnInit() {
     this.getuserRequestForUser();
   }
@@ -25,40 +25,66 @@ export class UserComponent implements OnInit {
   ngOnDestroy() {
   }
 
-  openChangeStatusModal(content,userId:any) {
-    this.currentuserId=userId
+  openChangeStatusModal(content, userId: any) {
+    this.currentuserId = userId
     const modalRef = this.modalService.open(content, { size: 'sm', centered: true });
   }
 
-  
-  getuserRequestForUser(){
+
+  getuserRequestForUser() {
     this.spinner.show();
     this.userService.getAllUsers().subscribe({
-      next:(response:any)=>{
-        this.userList=response;
-        this.gridResult=response;
+      next: (response: any) => {
+        if (response.length > 0) {
+          response.forEach(element => {
+            var currentOrderAmount=0;
+            if (element.orders.length > 0) {
+              var completedOrder = element.orders.filter(x => x.orderStatus == 'Completed').length;
+              var pendingOrder = element.orders.filter(x => x.orderStatus == 'Pending');
+              element['completedOrder'] = completedOrder;
+              element['pendingOrder'] = pendingOrder.length;
+              if(pendingOrder.length>0){
+                currentOrderAmount=pendingOrder[0].products.amount;
+              }
+            }
+            if (element.userAccount.length > 0) {
+              if(element.userAccount[0].balanceAmount<currentOrderAmount){
+                element['rechargeRequired']=currentOrderAmount-element.userAccount[0].balanceAmount;
+              }
+              else{
+                element['rechargeRequired']=0;
+              }
+              element['balanceAmount']=element.userAccount[0].balanceAmount;
+            }
+          });
+
+        }
+        console.log(response)
+
+        this.userList = response;
+        this.gridResult = response;
         this.spinner.hide();
       },
-      error:(err:any)=>{
+      error: (err: any) => {
         this.toastr.error(err.error);
         this.spinner.hide();
       }
     })
   }
 
-  searchFilterChange(val:any){
-    if(val!=""){
-      let copy=JSON.stringify(this.userList)
-      this.gridResult=JSON.parse(copy).filter((x:any)=>{
+  searchFilterChange(val: any) {
+    if (val != "") {
+      let copy = JSON.stringify(this.userList)
+      this.gridResult = JSON.parse(copy).filter((x: any) => {
         return x.name.toLowerCase().indexOf(val.toLowerCase()) >= 0;
       });
     }
-    else{
-      this.gridResult=this.userList;
+    else {
+      this.gridResult = this.userList;
     }
-    
+
   }
- 
+
 }
 
 
