@@ -3,6 +3,7 @@ using Diversity.Infrastructure.Repositories.Interfaces;
 using Diversity.Infrastructure.SharedRepositories;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,6 +13,12 @@ namespace Diversity.Infrastructure.Repositories.Implementation
     {
         public UserDetailRepository(DataContext context) : base(context)
         {
+        }
+
+        public async Task<List<UserDetail>> GetAllUsersDetails()
+        {
+            var data=await this.DataContext.Set<UserDetail>().Include(x=>x.UserAccounts).Include(x=>x.Orders).ToListAsync();
+            return data;
         }
 
         public async Task<UserDetail> GetByEmail(string email)
@@ -33,5 +40,6 @@ namespace Diversity.Infrastructure.Repositories.Implementation
                 throw;
             }
         }
+
     }
 }

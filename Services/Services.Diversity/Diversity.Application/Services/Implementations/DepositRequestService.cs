@@ -31,10 +31,11 @@ namespace Diversity.Application.Services.Implementations
 
         public async Task<BankDetails> CreateBankDetails(IFormFile file)
         {
-            var fileName = await this.fileService.UploadedFile(file);
+            var fileObj = await this.fileService.UploadedFile(file);
             BankDetails details = new BankDetails()
             {
-                ImagePath =fileName
+                ImagePath = fileObj.Url,
+                PublicId=fileObj.PublicId
             };
             var create=await this.bankDetailRepository.AddAsync(details);
             return create;
@@ -44,14 +45,15 @@ namespace Diversity.Application.Services.Implementations
         {
             try
             {
-                var fileName = await this.fileService.UploadedFile(request.ProofFile);
+                var fileObj = await this.fileService.UploadedFile(request.ProofFile);
                 DepositRequest depositrequest = new DepositRequest()
                 {
                     Amount = request.Amount,
                     OtherDetails = request.OtherDetails,
                     Status = request.Status,
                     Type = request.Type,
-                    ProofPath = fileName,
+                    ProofPath = fileObj.Url,
+                    PublicId=fileObj.PublicId,
                     UserId = (int)request.UserId
                 };
                 var insert = await this.depositRequestRepository.AddAsync(depositrequest);

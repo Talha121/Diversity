@@ -58,7 +58,7 @@
                   {{deposit.type}}
                 </td>
                 <td>
-                  <a href="{{fileBaseurl+deposit.proofPath}}" target="_blank">Deposit Proof</a>
+                  <a href="{{deposit.proofPath}}" target="_blank">Deposit Proof</a>
                 </td>
                 <td>
                   <span class="badge badge-dot mr-4">
@@ -119,7 +119,7 @@
         <div class="col-lg-12">
           <div class="form-group">
             <label class="form-control-label" for="input-last-name" >Bank Details</label>
-            <img src="{{fileBaseurl + BankDetailImagePath}}" style="width:100%"/>
+            <img src="{{BankDetailImagePath}}" style="width:100%"/>
           </div>
         </div>
       </div>
@@ -127,6 +127,6 @@
 	</div>
 	<div class="modal-footer">
 		<button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-    <button type="button" class="btn btn-primary" (click)="saveDeposit()">Save</button>
+    <button type="button" class="btn btn-primary" (click)="saveDeposit()">Deposit</button>
 	</div>
 </ng-template>

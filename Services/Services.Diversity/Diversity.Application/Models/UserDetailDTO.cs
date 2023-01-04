@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Diversity.Domain.Entities;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,9 @@ namespace Diversity.Application.Models
         public string PhoneNumber { get; set; }
         public string Role { get; set; }
         public bool IsActive { get; set; }
+        public string PublicId { get; set; }
         public IFormFile? ProfileImage { get; set; }
+        public List<UserAccountDTO> UserAccount { get; set; }
+        public List<OrderDTO> Orders { get; set; }
     }
 }

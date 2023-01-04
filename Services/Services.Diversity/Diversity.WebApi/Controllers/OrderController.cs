@@ -15,13 +15,14 @@ namespace Diversity.WebApi.Controllers
     {
         private readonly IOrderService orderService;
         private readonly IUserAccountService userAccountService;
+        private readonly IUserKYCService userKYCService;
         private readonly IProductService productService;
-        public OrderController(IOrderService orderService, IUserAccountService userAccountService, IProductService productService)
+        public OrderController(IOrderService orderService, IUserAccountService userAccountService, IProductService productService, IUserKYCService userKYCService)
         {
             this.orderService = orderService;
             this.userAccountService = userAccountService;
             this.productService = productService;
-
+            this.userKYCService = userKYCService;
         }
         [HttpGet("GetOrdersByUserId", Name = "GetOrdersByUserId")]
         public async Task<IActionResult> GetOrdersByUserId()
@@ -56,6 +57,20 @@ namespace Diversity.WebApi.Controllers
             try
             {
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var getUserKYCInfo = await this.userKYCService.GetUserKYC(int.Parse(userId));
+                if (getUserKYCInfo != null)
+                {
+                    if (getUserKYCInfo.Status != "Approved")
+                    {
+                        return Ok(new { res = "Kyc Not Approved." });
+                    }
+                }
+                else
+                {
+                    return Ok(new { res = "Kyc Not Approved." });
+                }
+                var createOrder = await this.orderService.CreateOrder(int.Parse(userId));
+
                 var currentOrders = await this.orderService.GetUserCurrentOrder(int.Parse(userId));
                 var totalOrder = await this.productService.GetAllProducts();
                 var data = new
@@ -75,21 +90,21 @@ namespace Diversity.WebApi.Controllers
         {
             try
             {
-                var userId =int.Parse(this.User.FindFirstValue(ClaimTypes.NameIdentifier));
+                var userId = int.Parse(this.User.FindFirstValue(ClaimTypes.NameIdentifier));
                 var data = await this.orderService.CompleteOrder(orderId);
                 var createNewOrder = await this.orderService.CreateOrder(userId);
-                var getUserAccount =await this.userAccountService.GetUserAccountById(userId);
+                var getUserAccount = await this.userAccountService.GetUserAccountById(userId);
                 var userProduct = await this.productService.GetProductById(data.ProductId);
                 if (getUserAccount != null)
                 {
                     UserAccountDTO acc = new UserAccountDTO()
                     {
-                        Id=getUserAccount.Id,
+                        Id = getUserAccount.Id,
                         UserId = userId,
-                        BalanceAmount =getUserAccount.BalanceAmount+userProduct.Commission,
-                        TotalCommission=getUserAccount.TotalCommission+userProduct.Commission,
+                        BalanceAmount = getUserAccount.BalanceAmount + userProduct.Commission,
+                        TotalCommission = getUserAccount.TotalCommission + userProduct.Commission,
                     };
-                var updateUserAccounts = await this.userAccountService.UpdateUserAccount(acc);
+                    var updateUserAccounts = await this.userAccountService.UpdateUserAccount(acc);
                 }
                 return Ok(data);
             }

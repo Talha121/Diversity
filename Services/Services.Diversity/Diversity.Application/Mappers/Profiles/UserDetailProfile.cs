@@ -13,7 +13,8 @@ namespace Diversity.Application.Mappers.Profiles
     {
         public UserDetailProfile()
         {
-            CreateMap<UserDetail, UserDetailDTO>();
+            CreateMap<UserDetail, UserDetailDTO>()
+                .ForMember(s => s.UserAccount, x => x.MapFrom(t => t.UserAccounts != null ? t.UserAccounts : null));
             CreateMap<UserDetailDTO, UserDetail>();
 
             CreateMap<UserDetailDTO, UserLoginDTO>();

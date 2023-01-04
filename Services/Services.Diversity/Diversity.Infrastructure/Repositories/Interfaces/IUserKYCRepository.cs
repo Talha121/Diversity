@@ -10,5 +10,7 @@ namespace Diversity.Infrastructure.Repositories.Interfaces
 {
     public interface IUserKYCRepository : IGenericRepository<UserKYC>
     {
+        Task<UserKYC> GetByUser(int userId);
+        Task<UserKYC> GetKYCById(int Id);
     }
 }

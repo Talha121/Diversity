@@ -14,7 +14,6 @@ export class AdminOrderComponent implements OnInit {
   orderList:any[]=[];
   gridResult:any[]=[];
   currentorderId:any=0;
-  fileBaseurl=environment.fileBaseUrl;
   orderStatus;any="";
   constructor(private modalService: NgbModal, private orderService: OrderService,private spinner:NgxSpinnerService,private toastr: ToastService) { }
   ngOnInit() {

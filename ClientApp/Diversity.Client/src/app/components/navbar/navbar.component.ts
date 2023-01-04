@@ -15,7 +15,6 @@ export class NavbarComponent implements OnInit {
   public listTitles: any[];
   public location: Location;
   userData:any={};
-  fileBaseUrl=environment.fileBaseUrl;
   constructor(location: Location,  private element: ElementRef, private router: Router,private authService:AuthService) {
     this.location = location;
   }

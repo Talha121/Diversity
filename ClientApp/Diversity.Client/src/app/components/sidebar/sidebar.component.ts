@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/_core/_services/auth.service';
+import { environment } from 'src/environments/environment';
 
 declare interface RouteInfo {
     path: string;
@@ -23,6 +24,7 @@ export const AdminROUTES: RouteInfo[] = [
   { path: '/admin/admin-withdraw', title: 'Withdraw',  icon:'ni-money-coins text-green', class: '' },
   { path: '/admin/product', title: 'Products',  icon:'ni-single-02 text-yellow', class: '' },
   { path: '/admin/user', title: 'Users',  icon:'ni-single-02 text-yellow', class: '' },
+  { path: '/admin/userKyc', title: 'Users Kyc',  icon:'ni-single-02 text-yellow', class: '' },
   // { path: '/icons', title: 'Icons',  icon:'ni-planet text-blue', class: '' },
   // { path: '/maps', title: 'Maps',  icon:'ni-pin-3 text-orange', class: '' },
   // { path: '/user-profile', title: 'User profile',  icon:'ni-single-02 text-yellow', class: '' },
@@ -40,7 +42,7 @@ export class SidebarComponent implements OnInit {
 
   public menuItems: any[];
   public isCollapsed = true;
-
+  userData:any={};
   constructor(private router: Router,private authService:AuthService) { }
 
   ngOnInit() {
@@ -57,6 +59,13 @@ export class SidebarComponent implements OnInit {
         this.isCollapsed = true;
      });
     }
-   
+    this.getDataFromToken();
+  }
+  getDataFromToken(){
+    this.userData=this.authService.DecodedToken;
+  }
+  logoutUser(){
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }

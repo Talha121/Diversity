@@ -50,7 +50,7 @@
                     <div class="avatar-group">
                       <span *ngIf="user.imageUrl !=null">
                         <a  class="avatar avatar-sm" data-toggle="tooltip" data-original-title="{{user.name}}">
-                          <img alt="{{user.name}}" src="{{fileBaseurl+user.imageUrl}}" class="rounded-circle">
+                          <img alt="{{user.name}}" src="{{user.imageUrl}}" class="rounded-circle">
                         </a>
                       </span>
                       <span *ngIf="user.imageUrl==null">

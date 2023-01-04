@@ -15,7 +15,6 @@ export class UserComponent implements OnInit {
   userList:any[]=[];
   gridResult:any[]=[];
   currentuserId:any=0;
-  fileBaseurl=environment.fileBaseUrl;
   userStatus;any="";
   searchedValue:string="";
   constructor(private modalService: NgbModal, private userService: UserService,private spinner:NgxSpinnerService,private toastr: ToastService) { }

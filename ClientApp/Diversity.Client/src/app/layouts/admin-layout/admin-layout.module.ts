@@ -23,6 +23,7 @@ import { UserHeaderComponent } from 'src/app/pages/user-header/user-header.compo
 import { UserGuard } from '../../_core/_guards/user.guard';
 import { AdminDashboardComponent } from 'src/app/pages/admin-dashboard/admin-dashboard.component';
 import { AdminGuard } from 'src/app/_core/_guards/admin.guard';
+import { UserKycComponent } from 'src/app/pages/user-Kyc/user-Kyc.component';
 
 @NgModule({
   imports: [
@@ -48,7 +49,8 @@ import { AdminGuard } from 'src/app/_core/_guards/admin.guard';
     AdminOrderComponent,
     ProductComponent,
     UserComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    UserKycComponent
   ],
   providers:[
     UserGuard,

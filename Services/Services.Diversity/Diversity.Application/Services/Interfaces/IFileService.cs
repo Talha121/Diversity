@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Diversity.Application.Models;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace Diversity.Application.Services.Interfaces
 {
     public interface IFileService
     {
-        Task<string> UploadedFile(IFormFile file);
+        Task<FileUploadedData> UploadedFile(IFormFile file);
+        Task<bool> DeleteFile(string publicId);
     }
 }

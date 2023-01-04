@@ -16,7 +16,6 @@ export class GrabOrderComponent implements OnInit {
 
   currentOrder: any = {};
   userBalanceAmount:number=0;
-  fileBaseUrl=environment.fileBaseUrl;
   constructor(private orderService: OrderService, private spinner: NgxSpinnerService, private toastr: ToastService,private router:Router,private dashboardService:DashboardService) { }
 
   ngOnInit() {
@@ -30,6 +29,12 @@ export class GrabOrderComponent implements OnInit {
     this.spinner.show();
     this.orderService.getCurrectOrder().subscribe({
       next: (response: any) => {
+        if(response.res){
+          Swal.fire('Sorry','KYC Not Approved Yet', 'error')
+          this.spinner.hide();
+          this.router.navigate(['/user/dashboard']);
+          return
+        }
         if(response.order==null){
           this.toastr.error("You have no more pending orders.")
           this.spinner.hide();
@@ -41,8 +46,9 @@ export class GrabOrderComponent implements OnInit {
           if(this.currentOrder.order && this.currentOrder.order.products.productImages.length>0){
             console.log("product images->"+this.currentOrder.order.products.productImages)
             this.currentOrder.order.products.productImages.forEach(element => {
-              this.imageObject.push({image:this.fileBaseUrl+element.imagePath,thumbImage:this.fileBaseUrl+element.imagePath})
+              this.imageObject.push({image:element.imagePath,thumbImage:element.imagePath})
             });
+            console.log("product images->"+this.imageObject)
           }
           else{
             this.imageObject=[];

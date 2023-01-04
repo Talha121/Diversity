@@ -14,6 +14,7 @@ namespace Diversity.Domain.Entities
         public double Amount { get; set; }
         public string Type { get; set; }
         public string ProofPath { get; set; }
+        public string PublicId { get; set; }
         public string OtherDetails { get; set; }
         public string Status { get; set; }
         [ForeignKey("UserId")]

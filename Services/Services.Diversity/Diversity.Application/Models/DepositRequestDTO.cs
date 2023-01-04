@@ -16,6 +16,7 @@ namespace Diversity.Application.Models
         public float Amount { get; set; }
         public string Type { get; set; }
         public string ProofPath { get; set; }
+        public string PublicId { get; set; }
         public string OtherDetails { get; set; }
         public string Status { get; set; }
         public string UserName { get; set; }

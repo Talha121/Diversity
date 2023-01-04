@@ -17,7 +17,6 @@ export class DepositComponent implements OnInit {
   selectedFile: any;
   depositList: any[] = [];
   gridResult: any[] = [];
-  fileBaseurl = environment.fileBaseUrl;
   BankDetailImagePath: string = "";
   constructor(private modalService: NgbModal, private depositService: DepositService, private spinner: NgxSpinnerService, private toastr: ToastService) { }
   ngOnInit() {

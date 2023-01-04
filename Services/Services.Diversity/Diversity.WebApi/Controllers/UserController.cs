@@ -55,7 +55,7 @@ namespace Diversity.WebApi.Controllers
                     };
                     var userAccount = await this.userAccountService.CreateUserAccount(useracc);
 
-                    var userOrder = await this.orderService.CreateOrder((int)user.Id);
+                    //var userOrder = await this.orderService.CreateOrder((int)user.Id);
 
                     var token=CreateToken(user);
                     return Ok(new { res = token });

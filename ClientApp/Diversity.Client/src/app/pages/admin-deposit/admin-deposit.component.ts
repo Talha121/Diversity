@@ -16,7 +16,7 @@ export class AdminDepositComponent implements OnInit {
   depositList: any[] = [];
   gridResult: any[] = [];
   currentDepositId: any = 0;
-  fileBaseurl = environment.fileBaseUrl;
+ 
   depositStatus; any = "";
   selectedFile: any;
   constructor(private modalService: NgbModal, private depositService: DepositService, private spinner: NgxSpinnerService, private toastr: ToastService) { }

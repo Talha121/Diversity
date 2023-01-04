@@ -31,30 +31,12 @@ namespace Diversity.Application.Services.Implementations
             if (orders == null||orders.Count==0)
             {
                 var products = await this.productService.GetAllProducts();
-                Order orderData = new Order()
-                {
-                    UserId = userId,
-                    ProductId = (int)products.Where(x => x.IsActive &&x.OrderNum!=null).OrderBy(x => x.OrderNum).Select(x => x.Id).FirstOrDefault(),
-                    OrderStatus = "Pending",
-                    OrderId = Guid.NewGuid(),
-                    CreatedDate=DateTime.Now
-                };
-                var orderResponse = await this.orderRepository.AddAsync(orderData);
-                return orderResponse;
-            }
-            else
-            {
-                var currentProductId = orders.OrderByDescending(x => x.Id).FirstOrDefault();
-                var product = await this.productService.GetProductById(currentProductId.ProductId);
-                var productList = await this.productService.GetAllProducts();
-
-                var nextProduct = productList.Where(x => x.IsActive == true && x.OrderNum > product.OrderNum).OrderBy(x => x.OrderNum).FirstOrDefault();
-                if (nextProduct != null)
+                if (products.Any())
                 {
                     Order orderData = new Order()
                     {
                         UserId = userId,
-                        ProductId = (int)nextProduct.Id,
+                        ProductId = (int)products.Where(x => x.IsActive && x.OrderNum != null).OrderBy(x => x.OrderNum).Select(x => x.Id).FirstOrDefault(),
                         OrderStatus = "Pending",
                         OrderId = Guid.NewGuid(),
                         CreatedDate = DateTime.Now
@@ -62,12 +44,35 @@ namespace Diversity.Application.Services.Implementations
                     var orderResponse = await this.orderRepository.AddAsync(orderData);
                     return orderResponse;
                 }
-                Order nullOrder = new Order()
+                return null;
+            }
+            else
+            {
+                var pendingOrder = orders.Where(x => x.OrderStatus == "Pending").FirstOrDefault();
+                if(pendingOrder == null)
                 {
+                    var currentProductId = orders.OrderByDescending(x => x.Id).FirstOrDefault();
+                    var product = await this.productService.GetProductById(currentProductId.ProductId);
+                    var productList = await this.productService.GetAllProducts();
 
-                };
-                return nullOrder;
-               
+                    var nextProduct = productList.Where(x => x.IsActive == true && x.OrderNum > product.OrderNum).OrderBy(x => x.OrderNum).FirstOrDefault();
+                    if (nextProduct != null)
+                    {
+                        Order orderData = new Order()
+                        {
+                            UserId = userId,
+                            ProductId = (int)nextProduct.Id,
+                            OrderStatus = "Pending",
+                            OrderId = Guid.NewGuid(),
+                            CreatedDate = DateTime.Now
+                        };
+                        var orderResponse = await this.orderRepository.AddAsync(orderData);
+                        return orderResponse;
+                    }
+                  
+                }
+             
+                return null;
             }
         }
 

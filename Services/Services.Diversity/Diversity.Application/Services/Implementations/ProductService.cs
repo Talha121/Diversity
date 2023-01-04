@@ -54,12 +54,12 @@ namespace Diversity.Application.Services.Implementations
                 List<ProductImage> images = new List<ProductImage>();
                 foreach(var item in product.ProductImages)
                 {
-                    var imageName = await this.fileService.UploadedFile(item);
-                    var path = imageName;
+                    var fileObj = await this.fileService.UploadedFile(item);
                     ProductImage image = new ProductImage()
                     {
-                        ImageName = imageName,
-                        ImagePath = path,
+                        ImageName = fileObj.Url,
+                        ImagePath = fileObj.Url,
+                        PublicId = fileObj.PublicId,
                         ProductId = productresponse.Id
                     };
                     images.Add(image);
@@ -106,12 +106,12 @@ namespace Diversity.Application.Services.Implementations
                     List<ProductImage> images = new List<ProductImage>();
                     foreach (var item in product.ProductImages)
                     {
-                        var imageName = await this.fileService.UploadedFile(item);
-                        var path = imageName;
+                        var fileObj = await this.fileService.UploadedFile(item);
                         ProductImage image = new ProductImage()
                         {
-                            ImageName = imageName,
-                            ImagePath = path,
+                            ImageName = fileObj.Url,
+                            ImagePath = fileObj.Url,
+                            PublicId= fileObj.PublicId,
                             ProductId = (int)product.Id
                         };
                         images.Add(image);

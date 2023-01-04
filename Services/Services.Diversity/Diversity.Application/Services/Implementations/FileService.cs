@@ -24,7 +24,15 @@ namespace Diversity.Application.Services.Implementations
             var acc = new Account(config.Value.CloudName, config.Value.ApiKey, config.Value.ApiSecret);
             this.cloudinary= new Cloudinary(acc);
         }
-        public async Task<string> UploadedFile(IFormFile file)
+
+        public async Task<bool> DeleteFile(string publicId)
+        {
+            var param= new DeletionParams(publicId);
+            var isDelete = await this.cloudinary.DestroyAsync(param);
+            return true;
+        }
+
+        public async Task<FileUploadedData> UploadedFile(IFormFile file)
         {
             var uploadResult = new ImageUploadResult();
 
@@ -38,7 +46,12 @@ namespace Diversity.Application.Services.Implementations
                 };
                 uploadResult = await cloudinary.UploadAsync(uploadParams);
             }
-            return uploadResult.Url.ToString();
+            var data = new FileUploadedData()
+            {
+                PublicId = uploadResult.PublicId,
+                Url = uploadResult.Url.ToString(),
+            };
+            return data;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Diversity.Domain.Entities;
 using Diversity.Infrastructure.Repositories.Interfaces;
 using Diversity.Infrastructure.SharedRepositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,16 @@ namespace Diversity.Infrastructure.Repositories.Implementation
     {
         public UserKYCRepository(DataContext context) : base(context)
         {
+        }
+
+        public async Task<UserKYC> GetByUser(int userId)
+        {
+            return await this.DataContext.Set<UserKYC>().Where(x => x.UserId == userId).AsNoTracking().FirstOrDefaultAsync();
+        }
+
+        public async Task<UserKYC> GetKYCById(int Id)
+        {
+            return await this.DataContext.Set<UserKYC>().Where(x => x.Id == Id).AsNoTracking().FirstOrDefaultAsync();
         }
     }
 }

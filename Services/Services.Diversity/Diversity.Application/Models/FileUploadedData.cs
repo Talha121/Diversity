@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Diversity.Application.Models
 {
-    public class ProductImageDTO
+    public class FileUploadedData
     {
-        public string ImageName { get; set; }
-        public string ImagePath { get; set; }
         public string PublicId { get; set; }
+        public string Url { get; set; }
+
     }
 }

@@ -7,6 +7,8 @@
     [DocumentImageOne] NVARCHAR(MAX) NULL, 
     [DocumentImageTwo] NVARCHAR(MAX) NULL,
     [Status] NVARCHAR(20) NULL, 
+    [DocumentImageOnePublicId] NVARCHAR(MAX) NULL, 
+    [DocumentImageTwoPublicId] NVARCHAR(MAX) NULL, 
     CONSTRAINT [PK_UserKYC] PRIMARY KEY CLUSTERED (Id ASC),
     CONSTRAINT [FK_UserKYC_UserDetail] FOREIGN KEY ([UserId]) REFERENCES [dbo].[UserDetail] ([Id])
 )

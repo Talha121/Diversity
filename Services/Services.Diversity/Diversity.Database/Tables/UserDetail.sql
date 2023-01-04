@@ -5,6 +5,7 @@
     [Email] NVARCHAR(50) NULL, 
     [Password] NVARCHAR(50) NULL, 
     [ImageUrl] NVARCHAR(MAX) NULL,
+    [PublicId] NVARCHAR(MAX) NULL,
     [Role] NVARCHAR(20) NULL,
     [PhoneNumber] NVARCHAR(20) NULL, 
     [IsActive] BIT NOT NULL,

@@ -46,7 +46,7 @@ namespace Diversity.Application.Services.Implementations
         {
             try
             {
-                var data = await this.userDetailRepository.GetAllAsync();
+                var data = await this.userDetailRepository.GetAllUsersDetails();
                 List<UserDetailDTO> users = this.mapper.Map<List<UserDetailDTO>>(data);
                 return users;
             }
@@ -80,8 +80,8 @@ namespace Diversity.Application.Services.Implementations
                 var data = await this.userDetailRepository.GetByIdAsync((int)userDetail.Id);
                 if (userDetail.ProfileImage != null)
                 {
-                    var fileName =await this.fileService.UploadedFile(userDetail.ProfileImage);
-                    data.ImageUrl = fileName;
+                    var fileObj =await this.fileService.UploadedFile(userDetail.ProfileImage);
+                    data.ImageUrl = fileObj.Url;
                 }
                 data.Name=userDetail.Name;
                 data.PhoneNumber = userDetail.PhoneNumber;

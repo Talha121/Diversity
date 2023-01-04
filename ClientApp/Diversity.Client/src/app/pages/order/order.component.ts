@@ -15,7 +15,6 @@ export class OrderComponent implements OnInit {
   selectedFile: any;
   orderList:any[]=[];
   gridResult:any[]=[];
-  fileBaseurl=environment.fileBaseUrl;
   constructor(private modalService: NgbModal, private orderService: OrderService,private spinner:NgxSpinnerService,private toastr: ToastService) { }
   ngOnInit() {
     this.getorderRequestForUser();

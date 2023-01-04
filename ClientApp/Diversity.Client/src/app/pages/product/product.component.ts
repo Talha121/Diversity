@@ -16,7 +16,6 @@ export class ProductComponent implements OnInit {
   productList: any[] = [];
   gridResult: any[] = [];
   currentproductId: any = 0;
-  fileBaseurl = environment.fileBaseUrl;
   productStatus; any = "";
   selectedFiles: File[] = [];
   selectedData: any = {};

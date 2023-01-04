@@ -6,12 +6,12 @@
       <div class="col">
         <div class="card bg-default shadow">
           <!-- <div class="card-header bg-transparent border-0">
-            <h3 class="text-white mb-0">Deposit Requests</h3>
-            <h3 class="btn btn-sm btn-primary text-right" (click)="openDepositModal(content)">Create New Request</h3>
+            <h3 class="text-white mb-0">userKyc Requests</h3>
+            <h3 class="btn btn-sm btn-primary text-right" (click)="openuserKycModal(content)">Create New Request</h3>
           </div> -->
           <div class="card-header bg-transparent border-0" style="overflow: auto;">
             <div  style="float: left;">
-              <h3 class="text-white mb-0">All Deposit Requests</h3>
+              <h3 class="text-white mb-0">All User Kyc Requests</h3>
             </div>
             <div style="float: right;">
               <div style="overflow: auto;">
@@ -23,9 +23,6 @@
                     <option value="Approved">Approved</option>
                   </select>
                 </div>
-                <div  style="float: right; ">
-                  <button (click)="openBankDetailModal(bankDetail)" class="btn btn-primary">Add Bank Detail</button>
-                </div>
               </div>
             </div>
           </div>
@@ -35,43 +32,41 @@
               <thead class="thead-dark">
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">User</th>
-                  <th scope="col">Amount</th>
-                  <th scope="col">Type</th>
-                  <th scope="col">Proof</th>
+                  <th scope="col">Identity Type</th>
+                  <th scope="col">Document Number</th>
+                  <th scope="col">Front Image</th>
+                  <th scope="col">Back Image</th>
                   <th scope="col">Status</th>
-                  <th scope="col">Details</th>
                   <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let deposit of gridResult;index as i">
+                <tr *ngFor="let userKyc of gridResult;index as i">
                   <td scope="row">
                     <div class="align-items-center">
                       {{i+1}}
                     </div>
                   </td>
                   <td>
-                    {{deposit.userName}}
+                    {{userKyc.identityType}}
                   </td>
                   <td>
-                    <span>$</span> {{deposit.amount}}
+                    {{userKyc.documentNumber}}
                   </td>
                   <td>
-                    {{deposit.type}}
+                    <a href="{{userKyc.documentImageOne}}" target="_blank">Front Image</a>
                   </td>
                   <td>
-                    <a href="{{deposit.proofPath}}" target="_blank">Deposit Proof</a>
+                    <a href="{{userKyc.documentImageTwo}}" target="_blank">Back Image</a>
                   </td>
                   <td>
                     <span class="badge badge-dot mr-4">
-                      <i class="bg-warning"></i> {{deposit.status}}
+                      <i class="bg-warning"></i> {{userKyc.status}}
                     </span>
                   </td>
-                  <td>{{deposit.otherDetails}}</td>
                   <td> 
-                    <div *ngIf="deposit.status=='Pending'">
-                      <button class="btn btn-success" (click)="openChangeStatusModal(content,deposit.id)">Change Status</button>
+                    <div *ngIf="userKyc.status=='Pending'">
+                      <button class="btn btn-success" (click)="openChangeStatusModal(content,userKyc.id)">Change Status</button>
                     </div>
                   </td>
                 </tr>
@@ -98,7 +93,7 @@
         <div class="col">
           <div class="form-group">
             <label class="form-control-label" for="input-email" >Status</label>
-            <select class="form-select" id="input-email" aria-label="Default select example" [(ngModel)]="depositStatus">
+            <select class="form-select" id="input-email" aria-label="Default select example" [(ngModel)]="userKycStatus">
               <option value="" selected>Open this select menu</option>
               <option value="Rejected">Rejected</option>
               <option value="Approved">Approved</option>
@@ -110,29 +105,7 @@
 	</div>
 	<div class="modal-footer">
 		<button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-    <button type="button" class="btn btn-primary" (click)="saveDepositstatus()">Save</button>
+    <button type="button" class="btn btn-primary" (click)="saveuserKycstatus()">Save</button>
 	</div>
 </ng-template>
 
-<ng-template #bankDetail let-modal>
-	<div class="modal-header">
-		<h4 class="modal-title">Add Bank Details</h4>
-		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
-	</div>
-	<div class="modal-body">
-    <form>
-      <div class="row">
-        <div class="col">
-          <div class="form-group">
-            <label class="form-control-label" for="input-email" >Image</label>
-            <input type="file" (change)="onFileSelected($event)" id="input-first-name" class="form-control form-control-alternative" >
-          </div>
-        </div>
-      </div>
-    </form>
-	</div>
-	<div class="modal-footer">
-		<button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-    <button type="button" class="btn btn-primary" (click)="saveBankDetail()">Save</button>
-	</div>
-</ng-template>

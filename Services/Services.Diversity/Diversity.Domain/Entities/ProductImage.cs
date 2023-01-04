@@ -12,6 +12,7 @@ namespace Diversity.Domain.Entities
         public int Id { get; set; }
         public string ImageName { get; set; }
         public string ImagePath { get; set; }
+        public string PublicId { get; set; }
         public int ProductId { get; set; }
         [ForeignKey("ProductId")]
         public virtual Product Products { get; set; }

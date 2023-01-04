@@ -23,4 +23,19 @@ export class UserService {
     return this.http.post(this.baseUrl + "User/UpdateProfile",data);
   }
 
+  getUserKyc() {
+    return this.http.get(this.baseUrl + "UserKYC/GetKYCByUser");
+  }
+
+  getAllUserKyc() {
+    return this.http.get(this.baseUrl + "UserKYC/GetAllKYC");
+  }
+
+  createKyc(data:any) {
+    return this.http.post(this.baseUrl + "UserKYC/CreateKYC",data);
+  }
+
+  updateKycStatus(data:any) {
+    return this.http.post(this.baseUrl + "UserKYC/updatekycstatus",data);
+  }
 }

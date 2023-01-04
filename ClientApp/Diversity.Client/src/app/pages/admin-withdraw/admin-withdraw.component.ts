@@ -15,7 +15,6 @@ export class AdminWithdrawComponent implements OnInit  {
   withdrawList:any[]=[];
   gridResult:any[]=[];
   currentwithdrawId:any=0;
-  fileBaseurl=environment.fileBaseUrl;
   withdrawStatus;any="";
   constructor(private modalService: NgbModal, private withdrawService: WithdrawService,private spinner:NgxSpinnerService,private toastr: ToastService) { }
   ngOnInit() {

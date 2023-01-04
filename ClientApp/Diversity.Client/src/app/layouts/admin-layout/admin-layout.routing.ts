@@ -15,6 +15,7 @@ import { ProductComponent } from 'src/app/pages/product/product.component';
 import { UserGuard } from 'src/app/_core/_guards/user.guard';
 import { AdminDashboardComponent } from 'src/app/pages/admin-dashboard/admin-dashboard.component';
 import { AdminGuard } from 'src/app/_core/_guards/admin.guard';
+import { UserKycComponent } from 'src/app/pages/user-Kyc/user-Kyc.component';
 
 export const AdminLayoutRoutes: Routes = [
     {
@@ -65,6 +66,10 @@ export const AdminLayoutRoutes: Routes = [
             {
                 path: 'product',
                 component: ProductComponent
+            },
+            {
+                path: 'userKyc',
+                component: UserKycComponent
             },
         ]
 
