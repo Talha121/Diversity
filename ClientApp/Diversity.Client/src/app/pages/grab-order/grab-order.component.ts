@@ -29,7 +29,7 @@ export class GrabOrderComponent implements OnInit {
   
 
   getCurrentUserOrder() {
-    debugger
+    this.imageObject=[];
     this.spinner.show();
     this.orderService.getCurrectOrder().subscribe({
       next: (response: any) => {
