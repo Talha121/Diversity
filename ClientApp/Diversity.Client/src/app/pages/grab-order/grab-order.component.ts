@@ -23,30 +23,9 @@ export class GrabOrderComponent implements OnInit {
     this.getBalanceAmount();
   }
 
-  imageObject: imageSlide[] = [{image:'',thumbImage:''}]
-  //     [{
-  //     image: 'http://res.cloudinary.com/dokagygt7/image/upload/v1672852005/edprvasqs8ctf3k6zyjk.jpg',
-  //     thumbImage: 'http://res.cloudinary.com/dokagygt7/image/upload/v1672852005/edprvasqs8ctf3k6zyjk.jpg',
-  //     title: 'Hummingbirds are amazing creatures'
-  // }, {
-  //     image: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/9.jpg',
-  //     thumbImage: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/9.jpg'
-  // }, {
-  //     image: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/4.jpg',
-  //     thumbImage: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/4.jpg',
-  //     title: 'Example with title.'
-  // },{
-  //     image: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/7.jpg',
-  //     thumbImage: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/7.jpg',
-  //     title: 'Hummingbirds are amazing creatures'
-  // }, {
-  //     image: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/1.jpg',
-  //     thumbImage: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/1.jpg'
-  // }, {
-  //     image: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/2.jpg',
-  //     thumbImage: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/2.jpg',
-  //     title: 'Example two with title.'
-  // }];
+  currentImageUrl='';
+  imageObject: imageSlide[] = []
+  
 
   getCurrentUserOrder() {
     debugger
@@ -76,6 +55,7 @@ export class GrabOrderComponent implements OnInit {
               };
               this.imageObject.push(data)
             });
+            this.currentImageUrl=this.imageObject[0].image;
           }
           else {
             this.imageObject = [];
@@ -122,6 +102,9 @@ export class GrabOrderComponent implements OnInit {
         this.userBalanceAmount = response.userAccountDetails?.balanceAmount;
       }
     })
+  }
+  changeImage(imgUrl:any){
+    this.currentImageUrl=imgUrl;
   }
 }
 
