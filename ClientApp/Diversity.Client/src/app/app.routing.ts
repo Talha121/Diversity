@@ -7,13 +7,13 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { AuthGuard } from './_core/_guards/auth.guard';
 import { AdminDepositComponent } from './pages/admin-deposit/admin-deposit.component';
+import { SitePageComponent } from './pages/site-page/site-page.component';
 
 const routes: Routes = [
  
   {
     path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full',
+    component: SitePageComponent,
   },
   {
     path: '',

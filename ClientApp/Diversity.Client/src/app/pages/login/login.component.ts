@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.spinner.hide();
           this.toastr.success(`Logged In Successfully.`);
           if(this.authService.isAuthenticated){
-            this.router.navigate(['/']);
+            this.router.navigate(['/user/dashboard']);
           }
         },
         error: (err) => {

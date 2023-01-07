@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit {
           this.spinner.hide()
           this.authService.accesToken = response.res;
           if(this.authService.isAuthenticated){
-            this.router.navigate(['/']);
+            this.router.navigate(['/user/dashboard']);
           }
          
         },
