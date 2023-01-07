@@ -107,13 +107,13 @@
               </div>
               <div style="float: right;">
                 <span *ngIf="userKycData !=undefined && userKycData !=null">
-                  <span *ngIf="userKycData?.status=='Pending'" class="text-yellow pr-2">Current status: {{userKycData?.status}}</span>
+                  <span *ngIf="userKycData?.status=='Pending'" class="text-blue pr-2">Current status: {{userKycData?.status}}</span>
                   <span *ngIf="userKycData?.status=='Approved'" class="pr-2" style="color: green;">Current status: {{userKycData?.status}}</span>
                   <span *ngIf="userKycData?.status=='Rejected'" class="pr-2" style="color: red;">Current status: {{userKycData?.status}}</span>
                  
                 </span>
                 <span *ngIf="userKycData ==undefined || userKycData ==null">
-                <span class="text-yellow pr-2">Current status: Not Submitted</span>
+                <span class="text-blue pr-2">Current status: Not Submitted</span>
               </span>
                 <a (click)="CreateKyc()" class="btn btn-sm btn-primary">Save Kyc</a>
                 

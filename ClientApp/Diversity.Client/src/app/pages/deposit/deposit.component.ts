@@ -5,6 +5,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { DepositService } from 'src/app/_core/_services/deposit.service';
 import { ToastService } from 'src/app/_core/_services/toast-service.service';
 import { environment } from 'src/environments/environment';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-deposit',
@@ -62,9 +63,11 @@ export class DepositComponent implements OnInit {
       this.depositService.createDepositRequest(formData).subscribe({
         next: (response: any) => {
           console.log(response)
-          this.toastr.success("Deposit Request Created Successfully.");
-          this.modalService.dismissAll();
+          Swal.fire('Deposit Requested', 'Please wait for approval', 'success')
           this.spinner.hide();
+          //this.toastr.success("Deposit Request Created Successfully.");
+          this.modalService.dismissAll();
+          //this.spinner.hide();
           this.getDepositRequestForUser();
         },
         error: (err: any) => {

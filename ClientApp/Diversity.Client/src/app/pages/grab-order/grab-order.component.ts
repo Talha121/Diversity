@@ -16,6 +16,7 @@ export class GrabOrderComponent implements OnInit {
 
   currentOrder: any = {};
   userBalanceAmount: number = 0;
+  userrechargerequired: number = 0;
   constructor(private orderService: OrderService, private spinner: NgxSpinnerService, private toastr: ToastService, private router: Router, private dashboardService: DashboardService,private cdr:ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -33,7 +34,7 @@ export class GrabOrderComponent implements OnInit {
     this.orderService.getCurrectOrder().subscribe({
       next: (response: any) => {
         if (response.res) {
-          Swal.fire('Sorry', 'KYC Not Approved Yet', 'error')
+          Swal.fire('KYC Not Approved Yet', 'Go to Proile and upload required documents to complete KYC Verification',  'error')
           this.spinner.hide();
           this.router.navigate(['/user/dashboard']);
           return
@@ -72,7 +73,12 @@ export class GrabOrderComponent implements OnInit {
 
   completeOrder() {
     if (this.currentOrder.order.products.amount > this.userBalanceAmount) {
-      this.toastr.error("Insufficient Balance. Please recharge your account.")
+      Swal.fire(
+        'Insufficient Balance',
+        'Please Recharge $'+this.userrechargerequired+' to your Account',
+        'info'
+      )
+      this.spinner.hide();
     }
     else {
       this.spinner.show();
@@ -82,7 +88,7 @@ export class GrabOrderComponent implements OnInit {
           this.toastr.success("Order Completed Successfully.");
           this.getCurrentUserOrder();
           this.loadUserDashboard();
-          Swal.fire('Congrats', 'Order Completed Successfully', 'success')
+          Swal.fire('Order Completed Successfully', 'Funds have been added to your account', 'success')
         },
         error: (err: any) => {
           this.spinner.hide();
@@ -100,6 +106,7 @@ export class GrabOrderComponent implements OnInit {
     this.dashboardService.userDashboardData$.subscribe(response => {
       if (response != null) {
         this.userBalanceAmount = response.userAccountDetails?.balanceAmount;
+        this.userrechargerequired = response.userAccountDetails?.rechargeAmount;
       }
     })
   }
