@@ -23,7 +23,8 @@
                 </select>
               </div>
               <div style="float: right;">
-                <button type="button" class="btn btn-primary" (click)="openDepositModal(content)">Deposit</button>
+                <button type="button" class="btn btn-primary" (click)="openDepositModal(content)" style="background-color: #f64749;
+                border-color: #f64749;">Deposit</button>
               </div>
             </div>
            
@@ -58,7 +59,7 @@
                   {{deposit.type}}
                 </td>
                 <td>
-                  <a href="{{deposit.proofPath}}" target="_blank">Deposit Proof</a>
+                  <a href="{{deposit.proofPath}}" target="_blank" style="color:#f64749 ;">Deposit Proof</a>
                 </td>
                 <td>
                   <span class="badge badge-dot mr-4">

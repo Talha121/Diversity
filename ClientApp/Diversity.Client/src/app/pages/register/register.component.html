@@ -56,7 +56,7 @@
               <label class="custom-control-label" for=" customCheckLogin">
                 <span class="text-muted">Accept Terms & Conditions</span>
               </label>
-              <label style="float: right;" (click)="openTermsAndConditionPopup(content)">View</label>
+              <label class="text-muted" style="float: right;font-size: small;" (click)="openTermsAndConditionPopup(content)">Terms</label>
             </div>
             <div class="text-center">
               <button type="button" [disabled]="(!termsConditionCheck)" class="btn btn-primary mt-4" (click)="registerUser()">Create account</button>
@@ -72,6 +72,7 @@
 <ng-template #content let-modal>
 	<div class="modal-header">
 		<h4 class="modal-title">Terms & Conditions</h4>
+    <p>These are terms and conditions</p>
 		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
 	</div>
 	<div class="modal-body">
