@@ -59,8 +59,6 @@ export class UserComponent implements OnInit {
           });
 
         }
-        console.log(response)
-
         this.userList = response;
         this.gridResult = response;
         this.spinner.hide();

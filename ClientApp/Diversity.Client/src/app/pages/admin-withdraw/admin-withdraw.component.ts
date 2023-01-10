@@ -39,7 +39,6 @@ export class AdminWithdrawComponent implements OnInit  {
       this.spinner.show();
       this.withdrawService.updatewithdrawRequest(data).subscribe({
         next: (response: any) => {
-          console.log(response)
           this.toastr.success("withdraw Approved Successfully.");
           this.modalService.dismissAll();
           this.spinner.hide();

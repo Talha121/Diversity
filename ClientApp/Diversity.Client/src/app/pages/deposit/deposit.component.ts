@@ -5,6 +5,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { DepositService } from 'src/app/_core/_services/deposit.service';
 import { ToastService } from 'src/app/_core/_services/toast-service.service';
 import { environment } from 'src/environments/environment';
+import { Clipboard } from '@angular/cdk/clipboard';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -19,7 +20,9 @@ export class DepositComponent implements OnInit {
   depositList: any[] = [];
   gridResult: any[] = [];
   BankDetailImagePath: string = "";
-  constructor(private modalService: NgbModal, private depositService: DepositService, private spinner: NgxSpinnerService, private toastr: ToastService) { }
+  bankDetails:any={};
+  public copy: string;
+  constructor(private modalService: NgbModal, private depositService: DepositService, private spinner: NgxSpinnerService, private toastr: ToastService,private clipboard: Clipboard) { }
   ngOnInit() {
     this.getBankDetails();
     this.getDepositRequestForUser();
@@ -59,10 +62,8 @@ export class DepositComponent implements OnInit {
       formData.append("type", formValues.type);
       formData.append("otherDetails", formValues.otherDetails);
       this.spinner.show();
-      console.log(formValues)
       this.depositService.createDepositRequest(formData).subscribe({
         next: (response: any) => {
-          console.log(response)
           Swal.fire('Deposit Requested', 'Please wait for approval', 'success')
           this.spinner.hide();
           //this.toastr.success("Deposit Request Created Successfully.");
@@ -110,6 +111,7 @@ export class DepositComponent implements OnInit {
     this.depositService.getBankDetails().subscribe({
       next: (response: any) => {
         this.spinner.hide();
+        this.bankDetails=response;
         this.BankDetailImagePath = response.imagePath;
       },
       error: (err: any) => {
@@ -117,5 +119,10 @@ export class DepositComponent implements OnInit {
         this.toastr.error(err.error)
       }
     })
+  }
+  copyToClipboard(data:any){
+   
+    this.clipboard.copy(data)
+    Swal.fire('Copied', 'Information Copied Successfully',  'success')
   }
 }

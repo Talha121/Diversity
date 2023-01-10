@@ -158,7 +158,6 @@ export class ProductComponent implements OnInit {
   }
 
   patchForm(data: any) {
-    console.log(data)
     if (data) {
       this.productForm.patchValue({
         title: data.title,

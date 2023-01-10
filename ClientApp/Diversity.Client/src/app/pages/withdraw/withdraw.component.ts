@@ -48,10 +48,8 @@ export class WithdrawComponent implements OnInit {
         return;
       }
       this.spinner.show();
-      console.log(formValues)
       this.withdrawService.createwithdrawRequest(formValues).subscribe({
         next: (response: any) => {
-          console.log(response)
           this.toastr.success("Withdraw Request Created Successfully.");
           this.modalService.dismissAll();
           this.spinner.hide();

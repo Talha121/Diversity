@@ -20,7 +20,6 @@ export class UserHeaderComponent implements OnInit {
     this.dashboardService.userDashboardData$.subscribe(response=>{
       if(response!=null){
         this.dashBoardData=response;
-        console.log(this.dashBoardData)
       }
     })
   }

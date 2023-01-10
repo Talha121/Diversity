@@ -78,11 +78,11 @@ namespace Diversity.WebApi.Controllers
         }
 
         [HttpPost("CreateBankDetails", Name = "CreateBankDetails")]
-        public async Task<IActionResult> CreateBankDetails(IFormFile file)
+        public async Task<IActionResult> CreateBankDetails([FromForm] BankDetailDTO dto)
         {
             try
             {
-                var data = await this.depositRequestService.CreateBankDetails(file);
+                var data = await this.depositRequestService.CreateBankDetails(dto);
                 return Ok(data);
             }
             catch (Exception ex)

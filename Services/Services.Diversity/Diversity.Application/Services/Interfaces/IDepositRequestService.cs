@@ -16,7 +16,7 @@ namespace Diversity.Application.Services.Interfaces
         Task<DepositRequest> CreateDepositRequest(DepositRequestDTO request);
         Task<DepositRequestDTO> UpdateDepositRequest(DepositRequestDTO request);
 
-        Task<BankDetails> CreateBankDetails(IFormFile file);
+        Task<BankDetails> CreateBankDetails(BankDetailDTO dto);
         Task<BankDetails> GetBankDetails();
     }
 }

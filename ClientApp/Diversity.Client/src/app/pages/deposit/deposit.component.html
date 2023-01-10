@@ -115,15 +115,39 @@
           </div>
         </div>
       </div>
+    </form>
+      <hr>
+      <h4 class="modal-title">Bank Details</h4>
+      <br>
       <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-6">
           <div class="form-group">
-            <label class="form-control-label" for="input-last-name" >Bank Details</label>
+            <label class="form-control-label" for="input-first-name">Account Title</label>
+            <div class="input-group suffix">                           
+               <input type="text" name="input" [(ngModel)]="bankDetails.accountTitle" disabled>
+              <span class="input-group-addon " (click)="copyToClipboard(bankDetails.accountTitle)">Copy</span>
+            </div>    
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="form-group">
+            <label class="form-control-label" for="input-first-name">Account Number</label>
+            <div class="input-group suffix">                           
+               <input type="text" name="input" [(ngModel)]="bankDetails.accountNumber" disabled>
+               <span class="input-group-addon " (click)="copyToClipboard(bankDetails.accountNumber)">Copy</span>
+            </div>    
+          </div>
+        </div>
+      </div>
+    
+      <div class="row justify-content-center">
+        <div class="col-lg-6">
+          <div class="form-group">
             <img src="{{BankDetailImagePath}}" style="width:100%;"/>
           </div>
         </div>
       </div>
-    </form>
+    
 	</div>
 	<div class="modal-footer">
 		<button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>

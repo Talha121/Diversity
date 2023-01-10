@@ -20,6 +20,7 @@ export class GrabOrderComponent implements OnInit {
   constructor(private orderService: OrderService, private spinner: NgxSpinnerService, private toastr: ToastService, private router: Router, private dashboardService: DashboardService,private cdr:ChangeDetectorRef) { }
 
   ngOnInit() {
+    this.dashboardService.getUserDashBoard();
     this.getCurrentUserOrder();
     this.getBalanceAmount();
   }

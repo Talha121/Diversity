@@ -122,6 +122,20 @@
 	<div class="modal-body">
     <form>
       <div class="row">
+        <div class="col-lg-6">
+          <div class="form-group">
+            <label class="form-control-label" for="input-username">Account Title</label>
+            <input type="text" id="input-username" class="form-control form-control-alternative" [(ngModel)]="accountTitle">
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="form-group">
+            <label class="form-control-label" for="input-email" >Account Number</label>
+            <input type="text" id="input-username" class="form-control form-control-alternative" [(ngModel)]="accountNumber">
+          </div>
+        </div>
+      </div>
+      <div class="row">
         <div class="col">
           <div class="form-group">
             <label class="form-control-label" for="input-email" >Image</label>

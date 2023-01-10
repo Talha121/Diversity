@@ -16,7 +16,8 @@ export class AdminDepositComponent implements OnInit {
   depositList: any[] = [];
   gridResult: any[] = [];
   currentDepositId: any = 0;
- 
+  accountNumber: string = "";
+  accountTitle: string = "";
   depositStatus; any = "";
   selectedFile: any;
   constructor(private modalService: NgbModal, private depositService: DepositService, private spinner: NgxSpinnerService, private toastr: ToastService) { }
@@ -45,7 +46,6 @@ export class AdminDepositComponent implements OnInit {
       this.spinner.show();
       this.depositService.updateDepositRequest(data).subscribe({
         next: (response: any) => {
-          console.log(response)
           this.toastr.success("Deposit Approved Successfully.");
           this.modalService.dismissAll();
           this.spinner.hide();
@@ -97,21 +97,26 @@ export class AdminDepositComponent implements OnInit {
   }
 
   saveBankDetail() {
-    if (this.selectedFile) {
+    if (this.selectedFile && this.accountNumber != "" && this.accountTitle != "") {
       const formData = new FormData();
       formData.append("file", this.selectedFile);
+      formData.append("accountNumber", this.accountNumber);
+      formData.append("accountTitle", this.accountTitle)
       this.spinner.show();
       this.depositService.saveBankDetails(formData).subscribe({
         next: (response: any) => {
           this.spinner.hide();
           this.modalService.dismissAll();
-          this.toastr.success("Images Saved Successfully")
+          this.toastr.success("Bank Details Saved Successfully")
         },
         error: (err: any) => {
           this.spinner.hide();
           this.toastr.error(err.error)
         }
       })
+    }
+    else{
+      this.toastr.error("Validation Failed")
     }
   }
 }

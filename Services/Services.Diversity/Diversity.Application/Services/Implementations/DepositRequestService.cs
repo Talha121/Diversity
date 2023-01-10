@@ -29,13 +29,15 @@ namespace Diversity.Application.Services.Implementations
             this.bankDetailRepository = bankDetailRepository;
         }
 
-        public async Task<BankDetails> CreateBankDetails(IFormFile file)
+        public async Task<BankDetails> CreateBankDetails(BankDetailDTO dto)
         {
-            var fileObj = await this.fileService.UploadedFile(file);
+            var fileObj = await this.fileService.UploadedFile(dto.file);
             BankDetails details = new BankDetails()
             {
                 ImagePath = fileObj.Url,
-                PublicId=fileObj.PublicId
+                PublicId=fileObj.PublicId,
+                AccountNumber=dto.AccountNumber,
+                AccountTitle=dto.AccountTitle
             };
             var create=await this.bankDetailRepository.AddAsync(details);
             return create;

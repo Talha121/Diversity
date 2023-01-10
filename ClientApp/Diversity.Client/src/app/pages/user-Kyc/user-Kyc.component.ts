@@ -41,7 +41,6 @@ export class UserKycComponent implements OnInit {
       this.spinner.show();
       this.userKycService.updateKycStatus(data).subscribe({
         next: (response: any) => {
-          console.log(response)
           this.toastr.success("User Kyc Approved Successfully.");
           this.modalService.dismissAll();
           this.spinner.hide();
