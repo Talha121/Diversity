@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl:"https://localhost:44345/api/"
+  baseUrl:"http://diversitywebapi-dev.us-east-1.elasticbeanstalk.com/api/"
 };
 
 /*
