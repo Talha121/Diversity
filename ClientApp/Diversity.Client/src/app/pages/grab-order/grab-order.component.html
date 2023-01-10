@@ -37,15 +37,15 @@
             <h2 class="product-title" style="font-size: 2rem !important;">{{currentOrder.order?.products?.title}}</h2>
 
             <div class="product-price">
-              <p class="new-price" style="font-size: 1.5rem !important; font-weight: bold !important;"><strong>Price: </strong><span style="font-weight: bold !important;">${{currentOrder.order?.products?.amount}}</span></p>
+              <p class="new-price" style="font-size: 1.5rem !important; font-weight: bold !important;"><strong>Price: </strong><span style="font-weight: bold; color: #f64749 !important ;">${{currentOrder.order?.products?.amount}}</span></p>
             </div>
 
             <div class="product-detail">
               <h2>about this item: </h2>
               <p>{{currentOrder.order?.products?.description}}</p>
               <ul>
-                <li style="font-size: 1.5rem !important;">Commission: <span>${{currentOrder.order?.products?.commission}}</span></li>
-                <li style="font-size: 1.5rem !important;">Estimated Return: <span>${{currentOrder.order?.products?.estimatedReturn}}</span></li>
+                <li style="font-size: 1.5rem !important;">Commission: <span style="font-weight: bold; color: #f64749 !important ;">${{currentOrder.order?.products?.commission}}</span></li>
+                <li style="font-size: 1.5rem !important;">Estimated Return: <span style="font-weight: bold; color: #f64749 !important ;">${{currentOrder.order?.products?.estimatedReturn}}</span></li>
               </ul>
             </div>
 
