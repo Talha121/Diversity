@@ -19,4 +19,13 @@ export class SitePageComponent implements OnInit {
   onTabClick(value:any){
     this.tabName=value
   }
+
+  getClassOf(val) {
+    if (val==this.tabName) {
+      return 'nav-link active show';
+    } else {
+      return 'nav-link';
+    }
+  }
+
 }

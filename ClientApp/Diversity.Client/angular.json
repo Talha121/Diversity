@@ -35,7 +35,9 @@
             ],
             "scripts": [
               "node_modules/chart.js/dist/Chart.min.js",
-              "node_modules/clipboard/dist/clipboard.min.js"
+              "node_modules/clipboard/dist/clipboard.min.js",
+              "src/assets/sitepage/js/main.js",
+              "src/assets/sitepage/vendor/swiper/swiper-bundle.min.js"
             ]
           },
           "configurations": {
