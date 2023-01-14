@@ -3,14 +3,14 @@
   <!-- Dark table -->
   <div class="row mt-5">
     <div class="col">
-      <div class="card bg-default shadow">
+      <div class="card shadow">
         <!-- <div class="card-header bg-transparent border-0">
           <h3 class="text-white mb-0">Deposit Requests</h3>
           <h3 class="btn btn-sm btn-primary text-right" (click)="openDepositModal(content)">Create New Request</h3>
         </div> -->
         <div class="card-header bg-transparent border-0" style="overflow: auto;">
           <div  style="float: left;">
-            <h3 class="text-white mb-0">Deposit Requests</h3>
+            <h3 class="mb-0">Deposits</h3>
           </div>
           <div style="float: right;">
             <div style="overflow: auto;">
@@ -34,8 +34,8 @@
         </div>
         
         <div class="table-responsive">
-          <table class="table align-items-center table-dark table-flush">
-            <thead class="thead-dark">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Amount</th>
@@ -62,7 +62,7 @@
                   <a href="{{deposit.proofPath}}" target="_blank" style="color:#f64749 ;">Deposit Proof</a>
                 </td>
                 <td>
-                  <span class="badge badge-dot mr-4">
+                  <span class="badge badge-dot mb-0" style="color: black ;"  >
                     <i class="bg-warning"></i> {{deposit.status}}
                   </span>
                 </td>
@@ -79,7 +79,7 @@
 
 <ng-template #content let-modal>
 	<div class="modal-header">
-		<h4 class="modal-title">Create New Deposit Request</h4>
+		<h4 class="modal-title">Deposit USDT</h4>
 		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
 	</div>
 	<div class="modal-body">
@@ -126,7 +126,7 @@
             <label class="form-control-label" for="input-first-name">Account Title</label>
             <div class="input-group suffix">                           
                <input type="text" name="input" [(ngModel)]="bankDetails.accountTitle" disabled>
-              <span class="input-group-addon " (click)="copyToClipboard(bankDetails.accountTitle)">Copy</span>
+              <span class="input-group-addon " (click)="copyToClipboard(bankDetails.accountTitle)"><img class="bi bi-activity" src="../../../assets/sitepage/img/hero-carousel/clipboard.png" style="width:1.5rem;height:1.5rem"></span>
             </div>    
           </div>
         </div>
@@ -135,7 +135,7 @@
             <label class="form-control-label" for="input-first-name">Account Number</label>
             <div class="input-group suffix">                           
                <input type="text" name="input" [(ngModel)]="bankDetails.accountNumber" disabled>
-               <span class="input-group-addon " (click)="copyToClipboard(bankDetails.accountNumber)">Copy</span>
+               <span class="input-group-addon " (click)="copyToClipboard(bankDetails.accountNumber)"><img class="bi bi-activity" src="../../../assets/sitepage/img/hero-carousel/clipboard.png" style="width:1.5rem;height:1.5rem"></span>
             </div>    
           </div>
         </div>
@@ -152,6 +152,7 @@
 	</div>
 	<div class="modal-footer">
 		<button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-    <button type="button" class="btn btn-primary" (click)="saveDeposit()">Deposit</button>
+    <button type="button" class="btn btn-primary" (click)="saveDeposit()" style="background-color: #f64749;
+    border-color: #f64749;">Deposit</button>
 	</div>
 </ng-template>

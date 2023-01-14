@@ -4,14 +4,14 @@
     <!-- Dark table -->
     <div class="row mt-5">
       <div class="col">
-        <div class="card bg-default shadow">
+        <div class="card shadow">
           <!-- <div class="card-header bg-transparent border-0">
             <h3 class="text-white mb-0">userKyc Requests</h3>
             <h3 class="btn btn-sm btn-primary text-right" (click)="openuserKycModal(content)">Create New Request</h3>
           </div> -->
           <div class="card-header bg-transparent border-0" style="overflow: auto;">
             <div  style="float: left;">
-              <h3 class="text-white mb-0">All User Kyc Requests</h3>
+              <h3 class="mb-0">All User Kyc Requests</h3>
             </div>
             <div style="float: right;">
               <div style="overflow: auto;">
@@ -28,8 +28,8 @@
           </div>
           
           <div class="table-responsive">
-            <table class="table align-items-center table-dark table-flush">
-              <thead class="thead-dark">
+            <table class="table align-items-center table-flush">
+              <thead class="thead-light">
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">User Name</th>
@@ -62,7 +62,7 @@
                     <a href="{{userKyc.documentImageTwo}}" target="_blank">Back Image</a>
                   </td>
                   <td>
-                    <span class="badge badge-dot mr-4">
+                    <span class="badge badge-dot mr-4" style="color: black ;">
                       <i class="bg-warning"></i> {{userKyc.status}}
                     </span>
                   </td>

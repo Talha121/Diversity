@@ -4,14 +4,14 @@
     <!-- Dark table -->
     <div class="row mt-5">
       <div class="col">
-        <div class="card bg-default shadow">
+        <div class="card shadow">
           <!-- <div class="card-header bg-transparent border-0">
             <h3 class="text-white mb-0">order Requests</h3>
             <h3 class="btn btn-sm btn-primary text-right" (click)="openorderModal(content)">Create New Request</h3>
           </div> -->
           <div class="card-header bg-transparent border-0" style="overflow: auto;">
             <div  style="float: left;">
-              <h3 class="text-white mb-0">All Orders</h3>
+              <h3 class="mb-0">All Orders</h3>
             </div>
             <div style="float: right;">
               <div style="overflow: auto;">
@@ -27,8 +27,8 @@
           </div>
           
           <div class="table-responsive">
-            <table class="table align-items-center table-dark table-flush">
-              <thead class="thead-dark">
+            <table class="table align-items-center table-flush">
+              <thead class="thead-light">
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Order Id</th>
@@ -68,7 +68,8 @@
                     {{order.products?.commission}}
                   </td>
                   <td> 
-                    {{order.orderStatus}}
+                    <span class="badge badge-dot mb-0" style="color: black ;"  >
+                    <i class="bg-warning"></i></span> {{order.orderStatus}}
                   </td>
                 </tr>
               </tbody>
