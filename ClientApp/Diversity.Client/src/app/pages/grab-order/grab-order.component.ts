@@ -20,9 +20,7 @@ export class GrabOrderComponent implements OnInit {
   constructor(private orderService: OrderService, private spinner: NgxSpinnerService, private toastr: ToastService, private router: Router, private dashboardService: DashboardService,private cdr:ChangeDetectorRef) { }
 
   ngOnInit() {
-    this.dashboardService.getUserDashBoard();
     this.getCurrentUserOrder();
-    this.getBalanceAmount();
   }
 
   currentImageUrl='';
@@ -62,6 +60,7 @@ export class GrabOrderComponent implements OnInit {
           else {
             this.imageObject = [];
           }
+          this.getBalanceAmount();
           this.cdr.detectChanges();
         }
       },
@@ -88,7 +87,6 @@ export class GrabOrderComponent implements OnInit {
           this.spinner.hide();
           this.toastr.success("Order Completed Successfully.");
           this.getCurrentUserOrder();
-          this.loadUserDashboard();
           Swal.fire('Order Completed Successfully', 'Funds have been added to your account', 'success')
         },
         error: (err: any) => {
@@ -99,11 +97,9 @@ export class GrabOrderComponent implements OnInit {
     }
 
   }
-  loadUserDashboard() {
-    this.dashboardService.getUserDashBoard();
-  }
 
   getBalanceAmount() {
+    this.dashboardService.getUserDashBoard();
     this.dashboardService.userDashboardData$.subscribe(response => {
       if (response != null) {
         this.userBalanceAmount = response.userAccountDetails?.balanceAmount;
