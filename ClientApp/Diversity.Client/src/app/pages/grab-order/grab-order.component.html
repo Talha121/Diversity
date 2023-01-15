@@ -26,8 +26,8 @@
             </div>
             <div class="img-select">
               <div class="img-item" *ngFor="let img of imageObject">
-                <a (click)="changeImage(img.image)" data-id="1">
-                  <img style="min-height: 5rem;" [src]="img.image" alt="shoe image">
+                <a (click)="changeImage(img.image)">
+                  <img  style="min-height: 5rem;" [src]="img.image" alt="shoe image">
                 </a>
               </div>
             </div>
