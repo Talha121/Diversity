@@ -87,7 +87,9 @@ export class GrabOrderComponent implements OnInit {
           this.spinner.hide();
           this.toastr.success("Order Completed Successfully.");
           this.getCurrentUserOrder();
-          Swal.fire('Order Completed Successfully', 'Funds have been added to your account', 'success')
+          Swal.fire('Order Completed Successfully', 'Funds have been added to your account', 'success').then((result) => {
+            window.location.reload();
+          })
         },
         error: (err: any) => {
           this.spinner.hide();
